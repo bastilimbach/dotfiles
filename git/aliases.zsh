@@ -16,11 +16,11 @@ alias ga="git add"
 alias gaa="git add --all"
 alias gst="git stash save --include-untracked"
 alias gres="git reset"
-alias gundo="git reset --soft HEAD~"
+alias gundo="git reset $@ HEAD"
 
 alias gc='git commit -S'
 alias gca='git commit -S -a'
-alias gac='git add -A && git commit -m'
+alias gac='git add --all && git commit -S -m'
 
 alias gco='git checkout'
 alias gb='git branch'
