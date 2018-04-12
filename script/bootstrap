@@ -49,15 +49,20 @@ setup_gitconfig () {
   fi
 }
 
-setup_package_manager () {
-    info 'setup package manager'
+setup_env () {
+    info 'setup environment'
 
-    user ' - What package manager are you using?'
+    user ' - What package manager are you using? (eg: apt-get)'
     read -e package_manager
 
-    sed -e "s/REPLACE_ME/$package_manager/g" system/env.zsh
+    user ' - What editor are you using? (eg: vim)'
+    read -e editor
 
-    success 'package manager'
+    sed -e "s/PACKAGE_MANAGER_NAME/$package_manager/g" \
+        -e "s/EDITOR_NAME/$editor/g" \
+        system/env.zsh.example > system/env.zsh
+
+    success 'setup environment'
 }
 
 
@@ -149,7 +154,7 @@ install_dotfiles () {
 }
 
 setup_gitconfig
-setup_package_manager
+setup_env
 install_dotfiles
 
 # If we're on a Mac, let's install and setup homebrew.
