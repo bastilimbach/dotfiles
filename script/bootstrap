@@ -55,7 +55,7 @@ setup_package_manager () {
     user ' - What package manager are you using?'
     read -e package_manager
 
-    sed -e "s/SYSTEM_PACKAGE_MANAGER=/SYSTEM_PACKAGE_MANAGER=$package_manager/g" system/env.zsh
+    sed -e "s/REPLACE_ME/$package_manager/g" system/env.zsh
 
     success 'package manager'
 }
