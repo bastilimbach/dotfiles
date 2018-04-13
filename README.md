@@ -1,6 +1,8 @@
 # Dotfiles
 > This is a heavily modified fork from [holman's excellent dotfiles](https://github.com/holman/dotfiles)
 
+![screenshot](./screenshot.png)
+
 Your dotfiles are how you personalize your system. These are mine.
 These dotfiles are the bare minimum to provide an environment which I'm comfortable working with.
 It should work on macOS and Linux based systems.
