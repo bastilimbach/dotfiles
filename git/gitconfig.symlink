@@ -33,6 +33,8 @@
         prune = true
 [commit]
         gpgSign = true
+[tag]
+	forceSignAnnotated = true
 [merge]
         ff = false
         conflictStyle = diff3
