@@ -9,6 +9,7 @@ alias gpl='git pull --rebase'
 alias gf="git fetch --prune"
 alias gs='git status -sb'
 alias gp='git push origin HEAD'
+alias gpc='git push origin HEAD:refs/for/master'
 alias grb="git rebase"
 alias grbi="git rebase -i HEAD~$1"
 
