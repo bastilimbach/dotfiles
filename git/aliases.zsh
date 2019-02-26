@@ -16,7 +16,10 @@ alias grbi="git rebase -i HEAD~$1"
 alias ga="git add"
 alias gaa="git add --all"
 alias gst="git stash save --include-untracked"
+alias gstp="git stash pop"
+alias gstcl="git stash clear"
 alias gres="git reset"
+alias greso="git reset --hard origin/HEAD"
 alias gundo="git reset $@ HEAD"
 
 alias gc='git commit -S'
