@@ -18,7 +18,8 @@
         compression = 0
 [apply]
         whitespace = nowarn
-[mergetool]
+[mergetool "p4merge"]
+        path = /Applications/p4merge.app/Contents/MacOS/p4merge
         keepBackup = false
 [difftool]
         prompt = false
@@ -38,6 +39,7 @@
 [merge]
         ff = false
         conflictStyle = diff3
+        tool = p4merge
 [rebase]
         autoStash = true
 [status]
