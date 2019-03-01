@@ -12,6 +12,7 @@ alias gp='git push origin HEAD'
 alias gpc='git push origin HEAD:refs/for/master'
 alias grb="git rebase"
 alias grbi="git rebase -i HEAD~$1"
+alias gmt="git mergetool"
 
 alias ga="git add"
 alias gaa="git add --all"
