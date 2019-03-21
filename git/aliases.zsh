@@ -11,6 +11,7 @@ alias gs='git status -sb'
 alias gp='git push origin HEAD'
 alias gpc='git push origin HEAD:refs/for/master'
 alias grb="git rebase"
+alias grbs="git rebase --skip"
 alias grbc="git rebase --continue"
 alias grba="git rebase --abort"
 alias grbi="git rebase -i HEAD~$1"
