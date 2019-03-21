@@ -21,6 +21,9 @@
 [mergetool "p4merge"]
         path = /Applications/p4merge.app/Contents/MacOS/p4merge
         keepBackup = false
+[mergetool "smerge"]
+        cmd = smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
+        trustExitCode = true
 [difftool]
         prompt = false
 [help]
@@ -39,7 +42,7 @@
 [merge]
         ff = false
         conflictStyle = diff3
-        tool = p4merge
+        tool = smerge
 [rebase]
         autoStash = true
 [status]
