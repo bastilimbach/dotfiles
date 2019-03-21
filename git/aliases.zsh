@@ -26,7 +26,7 @@ alias greso="git reset --hard origin/HEAD"
 alias gundo="git reset $@ HEAD"
 
 alias gc='git commit -S'
-alias gca='git commit -S -a'
+alias gca='git commit -S --amend'
 alias gac='git add --all && git commit -S -m'
 
 alias gco='git checkout'
