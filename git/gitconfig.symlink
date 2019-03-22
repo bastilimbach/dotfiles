@@ -49,3 +49,5 @@
         showUntrackedFiles = all
 [transfer]
         fsckobjects = true
+[rerere]
+	enabled = true
