@@ -30,6 +30,11 @@ alias gresh="git reset --hard"
 alias greso="git reset --hard origin/HEAD"
 alias gundo="git reset $@ HEAD"
 
+alias gbss="git bisect start"
+alias gbsr="git bisect reset"
+alias gbsg="git bisect good"
+alias gbsb="git bisect bad"
+
 alias gc='git commit -S'
 alias gca='git commit -S --amend'
 alias gac='git add --all && git commit -S -m'
