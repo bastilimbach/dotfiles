@@ -1,3 +1,4 @@
+alias g="git"
 alias gti="git"
 alias gls="git log --graph --pretty=format:'%C(bold red)%h%Creset [%Cblue%an%Creset] %s -%C(auto)%d%Creset %C(yellow)(%cr)%Creset'"
 alias gll="git log --pretty=format:'%C(bold red)%h%Creset [%Cblue%an%Creset] %s -%C(auto)%d%Creset %C(yellow)(%cr)%Creset' --numstat"
