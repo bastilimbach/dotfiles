@@ -41,5 +41,7 @@ alias gca='git commit -S --amend'
 alias gac='git add --all && git commit -S -m'
 
 alias gco='git checkout'
+alias gcob='git checkout -b'
 alias gcp="git cherry-pick -x"
 alias gb='git branch'
+alias gbr='git branch -D'
