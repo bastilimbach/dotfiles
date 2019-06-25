@@ -2,6 +2,8 @@ alias g="git"
 alias gti="git"
 alias gls="git log --graph --pretty=format:'%C(bold red)%h%Creset [%Cblue%an%Creset] %s -%C(auto)%d%Creset %C(yellow)(%cr)%Creset'"
 alias gll="git log --pretty=format:'%C(bold red)%h%Creset [%Cblue%an%Creset] %s -%C(auto)%d%Creset %C(yellow)(%cr)%Creset' --numstat"
+alias glf="git log --pretty=full"
+alias glm="git log -n 1 --pretty=%B"
 alias gd='git diff --color | sed "s/^\([^-+ ]*\)[-+ ]/\\1/" | less -r'
 alias glw="watch -c -n 1 -t git log --oneline --all --graph --decorate --color=always"
 
