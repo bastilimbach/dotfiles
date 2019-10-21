@@ -30,7 +30,7 @@ alias gstcl="git stash clear"
 alias gres="git reset --mixed"
 alias gress="git reset --soft"
 alias gresh="git reset --hard"
-alias greso="git reset --hard @{upstream}"
+alias greso="git fetch --prune && git reset --hard @{upstream}"
 alias gundo="git reset $@ HEAD"
 
 alias gbss="git bisect start"
