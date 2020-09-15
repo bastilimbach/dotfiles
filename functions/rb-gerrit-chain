@@ -13,17 +13,21 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations
 # under the License.
+#
+# 1. Checkout: "child branch"
+# 2. Execute: rb-gerrit-chain "parent branch"
+# 3. If follow-up is empty execute: git commit --allow-empty
 rb-gerrit-chain () {
-  BRANCHTO=$1
+  BRANCHTO=$1 # parent => commit 222
   if [[ -z ${BRANCHTO} ]];then
     echo "You need to specify a parent branch as the argument of this script"
     exit 1
   fi
-  LAST_COMMIT=$(git rev-parse HEAD)
-  CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-  TEMP_BRANCH=${CURRENT_BRANCH}-$$
-  git checkout -b ${TEMP_BRANCH} ${BRANCHTO}
-  git cherry-pick ${LAST_COMMIT}
-  git branch -D ${CURRENT_BRANCH}
-  git branch -M ${TEMP_BRANCH} ${CURRENT_BRANCH}
+  LAST_COMMIT=$(git rev-parse HEAD) # child => commit 111
+  CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) # child
+  TEMP_BRANCH=${CURRENT_BRANCH}-$$ # child-$$
+  git checkout -b ${TEMP_BRANCH} ${BRANCHTO} # child-$$ === parent
+  git cherry-pick ${LAST_COMMIT} # commit 222 > commit 111
+  git branch -D ${CURRENT_BRANCH} # delete child
+  git branch -M ${TEMP_BRANCH} ${CURRENT_BRANCH} # child-$$ => child
 }
