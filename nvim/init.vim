@@ -25,6 +25,8 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'unblevable/quick-scope'
 " Themes
 Plug 'dracula/vim', { 'as': 'dracula' }
