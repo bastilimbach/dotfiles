@@ -4,14 +4,6 @@ autoload -Uz compinit && compinit
 export ZSH=$HOME/.dotfiles
 export DOTFILES=$HOME/.dotfiles
 
-# Stash your environment variables in ~/.localrc. This means they'll stay out
-# of your main dotfiles repository (which may be public, like this one), but
-# you'll have access to them in your scripts.
-if [[ -a ~/.localrc ]]
-then
-  source ~/.localrc
-fi
-
 # all of our zsh files
 typeset -U config_files
 config_files=($ZSH/**/*.zsh)
@@ -34,4 +26,15 @@ do
   source $file
 done
 
+# add each topic folder to fpath so that they can add functions and completion scripts
+for topic_folder ($ZSH/*) if [ -d $topic_folder ]; then  fpath=($topic_folder $fpath); fi;
+
 unset config_files
+
+# matches case insensitive for lowercase
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
+
+zstyle ':completion:*' menu select

@@ -2,6 +2,9 @@
     link:
       relink: true
       create: true
+    shell:
+      stderr: true
+      stdin: true
 
 - clean: ['~', '~/.config']
 
@@ -9,9 +12,11 @@
     ~/.zshrc: zsh/zshrc
 
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
+  - command: git submodule update --init --recursive
+    description: Installing submodules
   - command: find . -name install.sh | while read installer ; do chmod u+x "${installer}" ; done
     description: Make installers executable
   - command: find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
     description: Running installers
-  - [chsh -s $(which zsh), Making zsh the default shell]
+  - command: chsh -s $(which zsh)
+    description: Making zsh the default shell
