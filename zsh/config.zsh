@@ -1,15 +1,6 @@
-export LSCOLORS="exfxcxdxbxegedabagacad"
-export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
-export CLICOLOR=true
-export PATH="./bin:/usr/local/bin:/usr/local/sbin:$ZSH/bin:$PATH"
-export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/fre"
-export PLATIN_JAVA="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/fre"
-export PLUGIN_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/fre"
-
-fpath=($ZSH/functions $fpath)
-
-autoload -U $ZSH/functions/*(:t)
+# Load zsh functions
+fpath=($DOTFILES/zsh/functions $fpath)
+autoload -U $DOTFILES/zsh/functions/*(:t)
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -42,3 +33,7 @@ autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # matches case insensitive for lowercase
+zstyle ':completion:*' insert-tab pending # pasting with tabs doesn't perform completion
+zstyle ':completion:*' menu select
