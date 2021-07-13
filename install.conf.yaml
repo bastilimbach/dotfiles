@@ -22,5 +22,5 @@
     description: Make installers executable
   - command: find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
     description: Running installers
-  - command: chsh -s $(which zsh)
-    description: Making zsh the default shell
+  # - command: chsh -s $(which zsh)
+  #   description: Making zsh the default shell
