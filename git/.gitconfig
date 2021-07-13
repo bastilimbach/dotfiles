@@ -1,6 +1,7 @@
 # Local/private config goes in the include
-[include]
-        path = ~/.gitconfig.local
+[user]
+        name = Sebastian Limbach
+        email = hello@sebastianlimbach.com
 [filter "lfs"]
         required = true
 	clean = git-lfs clean -- %f
