@@ -1,4 +1,3 @@
-" https://gist.github.com/synasius/5cdc75c1c8171732c817
 " Keymaps
 let mapleader = ","
 inoremap jk <ESC>
@@ -48,6 +47,12 @@ Plug 'unblevable/quick-scope'
 " Themes
 Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
+
+" Automatically install missing plugins
+autocmd VimEnter *
+  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \|   PlugInstall --sync | q
+  \| endif
 
 " Plugins config
 colorscheme dracula
