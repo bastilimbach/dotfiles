@@ -16,9 +16,14 @@ noremap O O <Esc>
 syntax on
 set number
 set relativenumber
+set clipboard^=unnamed,unnamedplus
+set undolevels=1000
+set noshowmode
+
+" Backup
 set noswapfile
 set nobackup
-set clipboard^=unnamed,unnamedplus
+set nowritebackup
 
 " Search
 set hlsearch
@@ -43,6 +48,10 @@ Plug 'tpope/vim-commentary'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'unblevable/quick-scope'
+Plug 'jiangmiao/auto-pairs'
+Plug 'machakann/vim-highlightedyank'
+Plug 'andymass/vim-matchup'
+Plug 'itchyny/lightline.vim'
 
 " Themes
 Plug 'dracula/vim', { 'as': 'dracula' }
