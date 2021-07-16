@@ -65,9 +65,9 @@ Plug 'tpope/vim-commentary'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'unblevable/quick-scope'
-Plug 'jiangmiao/auto-pairs', Cond(!exists('g:vscode'))
+Plug 'rstacruz/vim-closer'
 Plug 'machakann/vim-highlightedyank'
-Plug 'andymass/vim-matchup'
+Plug 'andymass/vim-matchup', Cond(!exists('g:vscode'))
 Plug 'itchyny/lightline.vim'
 
 " Themes
