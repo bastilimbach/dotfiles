@@ -40,6 +40,23 @@ set expandtab
 set autoindent
 set copyindent
 
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
+
+" Install vim-plug if not found
+let data_dir = stdpath('data') . '/site/autoload'
+if empty(glob(data_dir . '/plug.vim'))
+  silent !curl -fLo '.data_dir.'/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | q
+\| endif
+
 call plug#begin(stdpath('data') . '/plugged')
 " Plugins
 Plug 'tpope/vim-surround'
@@ -48,7 +65,7 @@ Plug 'tpope/vim-commentary'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'unblevable/quick-scope'
-Plug 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs', Cond(!exists('g:vscode'))
 Plug 'machakann/vim-highlightedyank'
 Plug 'andymass/vim-matchup'
 Plug 'itchyny/lightline.vim'
@@ -56,12 +73,6 @@ Plug 'itchyny/lightline.vim'
 " Themes
 Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
-
-" Automatically install missing plugins
-autocmd VimEnter *
-  \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \|   PlugInstall --sync | q
-  \| endif
 
 " Plugins config
 colorscheme dracula
