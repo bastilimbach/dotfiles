@@ -38,5 +38,6 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # matches case insensitive f
 zstyle ':completion:*' insert-tab pending # pasting with tabs doesn't perform completion
 zstyle ':completion:*' menu select
 
+bindkey '^ ' autosuggest-accept
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
