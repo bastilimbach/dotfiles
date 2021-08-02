@@ -9,7 +9,7 @@ alias glw="watch -c -n 1 -t git log --oneline --all --graph --decorate --color=a
 
 alias gcl="git clone"
 alias gpl='git pull --rebase'
-alias gf="git fetch --prune"
+alias gf="git fetch --all --prune"
 alias gs='git status -sb'
 alias gp='git push origin HEAD'
 alias gpc='git push origin HEAD:refs/for/master'
