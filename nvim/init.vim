@@ -24,6 +24,7 @@ noremap O O <Esc>
 
 " General settings
 syntax on
+filetype plugin indent on
 set number
 set relativenumber
 set clipboard^=unnamed,unnamedplus
