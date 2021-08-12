@@ -1,5 +1,15 @@
 " Keymaps
-let mapleader = ","
+nnoremap <SPACE> <Nop>
+let mapleader = " "
+
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<cr>
+if exists('g:vscode')
+  nnoremap <leader>w <Cmd>call VSCodeNotify('workbench.action.files.save')<CR>
+  nnoremap <leader>q <Cmd>call VSCodeNotify('workbench.action.closeWindow')<CR>
+endif
+nnoremap H ^
+nnoremap L $
 inoremap jk <ESC>
 inoremap kj <ESC>
 nnoremap <ESC> :set hlsearch!<CR>
