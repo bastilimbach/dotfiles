@@ -1,8 +1,12 @@
 # Environment variables
-export DOTFILES=$HOME/.dotfiles
-
 if [ ! -d "$HOME/.dotfiles" ]; then
-  # We are running inside a GitHub Codespace
+  echo "ERROR: The dotfiles need to be cloned to ${HOME}/.dotfiles."
+  echo "ERROR: If the dotfiles where cloned to a different place, multiple things will break!"
+fi
+
+export DOTFILES=$HOME/.dotfiles
+if [ -d "/workspaces/.codespaces" ]; then
+  # We are running inside a GitHub Codespace. GitHub doesn't clone the dotfiles into ~/.dotfiles.
   export DOTFILES=/workspaces/.codespaces/.persistedshare/dotfiles
 fi
 
