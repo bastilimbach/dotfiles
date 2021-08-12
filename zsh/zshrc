@@ -1,5 +1,5 @@
 # Environment variables
-if [ ! -d "$HOME/.dotfiles" ]; then
+if [ ! -d "$HOME/.dotfiles" ] && [ ! -d "/workspaces/.codespaces" ]; then
   echo "ERROR: The dotfiles need to be cloned to ${HOME}/.dotfiles."
   echo "ERROR: If the dotfiles where cloned to a different place, multiple things will break!"
 fi
