@@ -68,20 +68,22 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 \| endif
 
 call plug#begin(stdpath('data') . '/plugged')
-" Plugins
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'unblevable/quick-scope'
-Plug 'rstacruz/vim-closer'
-Plug 'machakann/vim-highlightedyank'
-Plug 'andymass/vim-matchup', Cond(!exists('g:vscode'))
-Plug 'itchyny/lightline.vim'
+  " Plugins
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-commentary'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim',
+  Plug 'unblevable/quick-scope'
+  Plug 'rstacruz/vim-closer', Cond(!exists('g:vscode'))
+  Plug 'machakann/vim-highlightedyank'
+  Plug 'andymass/vim-matchup', Cond(!exists('g:vscode'))
+  Plug 'itchyny/lightline.vim', Cond(!exists('g:vscode'))
+  Plug 'junegunn/vim-peekaboo', Cond(!exists('g:vscode'))
+  Plug 'suy/vim-context-commentstring'
 
-" Themes
-Plug 'dracula/vim', { 'as': 'dracula' }
+  " Themes
+  Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
 " Plugins config
