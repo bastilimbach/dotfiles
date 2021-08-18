@@ -2,12 +2,18 @@
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 
+map <leader>y "*y
+map <leader>yy "*yy
+map <leader>Y "*Y
+map <leader>p "*p<CR>
+map <leader>P "*P<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 if exists('g:vscode')
   nnoremap <leader>w <Cmd>call VSCodeNotify('workbench.action.files.save')<CR>
   nnoremap <leader>q <Cmd>call VSCodeNotify('workbench.action.closeWindow')<CR>
 endif
+nnoremap Y y$
 nnoremap H ^
 nnoremap L $
 inoremap jk <ESC>
