@@ -3,7 +3,7 @@ nnoremap <SPACE> <Nop>
 let mapleader = " "
 
 nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q<cr>
+nnoremap <leader>q :q<CR>
 if exists('g:vscode')
   nnoremap <leader>w <Cmd>call VSCodeNotify('workbench.action.files.save')<CR>
   nnoremap <leader>q <Cmd>call VSCodeNotify('workbench.action.closeWindow')<CR>
@@ -27,7 +27,6 @@ syntax on
 filetype plugin indent on
 set number
 set relativenumber
-set clipboard^=unnamed,unnamedplus
 set undolevels=1000
 set noshowmode
 
@@ -82,6 +81,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'itchyny/lightline.vim', Cond(!exists('g:vscode'))
   Plug 'junegunn/vim-peekaboo', Cond(!exists('g:vscode'))
   Plug 'suy/vim-context-commentstring'
+  Plug 'justinmk/vim-sneak'
 
   " Themes
   Plug 'dracula/vim', { 'as': 'dracula' }
@@ -91,5 +91,6 @@ call plug#end()
 colorscheme dracula
 hi Normal guibg=NONE ctermbg=NONE
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:sneak#label = 1
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
