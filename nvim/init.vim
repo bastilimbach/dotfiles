@@ -1,42 +1,52 @@
-" -------------- 
+" --------------
 " Keymaps
-" -------------- 
+" --------------
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 inoremap jk <ESC>
 inoremap kj <ESC>
-  
-" Copy & Paste 
+
+" Copy & Paste
 map <leader>y "*y
 map <leader>yy "*yy
 map <leader>Y "*Y
 map <leader>p "*p<CR>
 map <leader>P "*P<CR>
 nnoremap Y y$
- 
-" Save & Quit 
+
+" Save & Quit
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
- 
-" Navigate between windows 
+if exists('g:vscode')
+  nnoremap <leader>w <Cmd>call VSCodeNotify('workbench.action.files.save')<CR>
+  nnoremap <leader>q <Cmd>call VSCodeNotify('workbench.action.closeWindow')<CR>
+endif
+
+" Navigate between windows
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
- 
-" Line ending/start on home row 
+if exists('g:vscode')
+  nnoremap <C-h> <Cmd>call VSCodeNotify('workbench.action.focusLeftGroup')<CR>
+  nnoremap <C-j> <Cmd>call VSCodeNotify('workbench.action.focusBelowGroup')<CR>
+  nnoremap <C-k> <Cmd>call VSCodeNotify('workbench.action.focusAboveGroup')<CR>
+  nnoremap <C-l> <Cmd>call VSCodeNotify('workbench.action.focusRightGroup')<CR>
+endif
+
+" Line ending/start on home row
 nnoremap H ^
 nnoremap L $
- 
-" Settings toggles 
+
+" Settings toggles
 nnoremap <ESC> :set hlsearch!<CR>
- 
-" Faster scrolling 
+
+" Faster scrolling
 nnoremap J 6j
 nnoremap K 6k
 vnoremap K 6k
 vnoremap J 6j
- 
+
 " Stay in normal mode after inserting a new line
 noremap o o <Esc>
 noremap O O <Esc>
@@ -46,19 +56,13 @@ nnoremap <TAB> >>
 nnoremap <S-TAB> <<
 vnoremap <TAB> >
 vnoremap <S-TAB> <
- 
-" Plugin keymaps 
+
+" Plugin keymaps
 nnoremap <leader>v <cmd>CHADopen<CR>
- 
-" VSCode specific keymaps (neovim extension)
-if exists('g:vscode')
-  nnoremap <leader>w <Cmd>call VSCodeNotify('workbench.action.files.save')<CR>
-  nnoremap <leader>q <Cmd>call VSCodeNotify('workbench.action.closeWindow')<CR>
-endif
- 
-" -------------- 
+
+" --------------
 " General settings
-" -------------- 
+" --------------
 syntax on
 filetype plugin indent on
 set number
@@ -86,9 +90,9 @@ set expandtab
 set autoindent
 set copyindent
 
-" -------------- 
-" Plugins 
-" -------------- 
+" --------------
+" Plugins
+" --------------
 function! Cond(cond, ...)
   let opts = get(a:000, 0, {})
   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
@@ -141,9 +145,9 @@ let g:sneak#label = 1
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 
-" -------------- 
+" --------------
 " LSP
-" -------------- 
+" --------------
 if !exists('g:vscode')
   lua require('lspconfig').tsserver.setup{on_attach=require'completion'.on_attach}
   " Use <Tab> and <S-Tab> to navigate through popup menu
@@ -153,4 +157,4 @@ if !exists('g:vscode')
   " Set completeopt to have a better completion experience
   set completeopt=menuone,noinsert,noselect
   let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
-endif 
+endif
