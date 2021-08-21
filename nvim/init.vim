@@ -58,8 +58,14 @@ vnoremap <TAB> >
 vnoremap <S-TAB> <
 
 " Plugin keymaps
-nnoremap <leader>v <cmd>CHADopen<CR>
-
+" nnoremap <leader>v <cmd>CHADopen<CR>
+ 
+" Telescope keymaps 
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+ 
 " --------------
 " General settings
 " --------------
@@ -122,15 +128,17 @@ call plug#begin(stdpath('data') . '/plugged')
 
   " Disable certain plugins for VSCode
   if !exists('g:vscode')
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-    Plug 'junegunn/fzf.vim',
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim' 
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } 
     Plug 'neovim/nvim-lspconfig'
-    Plug 'nvim-lua/completion-nvim'
     Plug 'andymass/vim-matchup'
     Plug 'itchyny/lightline.vim'
     Plug 'junegunn/vim-peekaboo'
     Plug 'rstacruz/vim-closer'
-    Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+    " Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+    " Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
   endif
 
   " Themes
@@ -144,17 +152,48 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:sneak#label = 1
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-
+ 
+if !exists('g:vscode')
+  
+" --------------
+" Telescope
+" --------------
+lua <<EOF
+require('telescope').setup {
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = false, -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+    }
+  }
+}
+require('telescope').load_extension('fzf') 
+EOF
+ 
+" --------------
+" Treesitter
+" --------------
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true,
+  },
+}
+EOF
+ 
+ 
 " --------------
 " LSP
 " --------------
-if !exists('g:vscode')
-  lua require('lspconfig').tsserver.setup{on_attach=require'completion'.on_attach}
-  " Use <Tab> and <S-Tab> to navigate through popup menu
-  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-  " Set completeopt to have a better completion experience
-  set completeopt=menuone,noinsert,noselect
-  let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+lua << EOF
+  local lsp = require "lspconfig"
+  -- local coq = require "coq"
+  -- lsp.tsserver.setup(coq.lsp_ensure_capabilities())
+  -- lsp.tsserver.setup()
+EOF
+   
 endif
