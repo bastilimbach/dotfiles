@@ -59,13 +59,13 @@ vnoremap <S-TAB> <
 
 " Plugin keymaps
 " nnoremap <leader>v <cmd>CHADopen<CR>
- 
-" Telescope keymaps 
+
+" Telescope keymaps
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
- 
+
 " --------------
 " General settings
 " --------------
@@ -129,9 +129,9 @@ call plug#begin(stdpath('data') . '/plugged')
   " Disable certain plugins for VSCode
   if !exists('g:vscode')
     Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim' 
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
-    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } 
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'neovim/nvim-lspconfig'
     Plug 'andymass/vim-matchup'
     Plug 'itchyny/lightline.vim'
@@ -145,22 +145,24 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
-" Plugins config
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-let g:sneak#label = 1
-
 " --------------
 " Colorscheme & Highlights
 " --------------
 colorscheme dracula
+set background=dark
 highlight Normal guibg=NONE ctermbg=NONE
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-highlight Sneak guibg=NONE guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
-highlight SneakLabel guibg=NONE guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
- 
+highlight Sneak guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
+highlight SneakLabel guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
+highlight SneakLabelMask guifg=NONE ctermfg=NONE cterm=nocombine
+
+" Plugins config
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:sneak#label = 1
+
 if !exists('g:vscode')
-  
+
 " --------------
 " Telescope
 " --------------
@@ -174,9 +176,9 @@ require('telescope').setup {
     }
   }
 }
-require('telescope').load_extension('fzf') 
+require('telescope').load_extension('fzf')
 EOF
- 
+
 " --------------
 " Treesitter
 " --------------
@@ -190,8 +192,8 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
- 
- 
+
+
 " --------------
 " LSP
 " --------------
@@ -201,5 +203,5 @@ lua << EOF
   -- lsp.tsserver.setup(coq.lsp_ensure_capabilities())
   -- lsp.tsserver.setup()
 EOF
-   
+
 endif
