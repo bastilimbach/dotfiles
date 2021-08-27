@@ -146,12 +146,18 @@ call plug#begin(stdpath('data') . '/plugged')
 call plug#end()
 
 " Plugins config
-colorscheme dracula
-hi Normal guibg=NONE ctermbg=NONE
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:sneak#label = 1
+
+" --------------
+" Colorscheme & Highlights
+" --------------
+colorscheme dracula
+highlight Normal guibg=NONE ctermbg=NONE
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
 highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+highlight Sneak guibg=NONE guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
+highlight SneakLabel guibg=NONE guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
  
 if !exists('g:vscode')
   
