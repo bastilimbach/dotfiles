@@ -58,13 +58,16 @@ vnoremap <TAB> >
 vnoremap <S-TAB> <
 
 " Plugin keymaps
-" nnoremap <leader>v <cmd>CHADopen<CR>
+nnoremap <leader>v <cmd>NvimTreeToggle<CR>
 
 " Telescope keymaps
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" LSP keymaps
+nnoremap gh <cmd>lua vim.lsp.buf.hover()<CR>
 
 " --------------
 " General settings
@@ -75,6 +78,7 @@ set number
 set relativenumber
 set undolevels=1000
 set noshowmode
+set termguicolors
 
 " Backup
 set noswapfile
@@ -95,10 +99,22 @@ set shiftwidth=2
 set expandtab
 set autoindent
 set copyindent
+set listchars=space:·,eol:↴,precedes:«,extends:»,trail:~
+set list
+
+" --------------
+" Autocommands
+" --------------
+augroup TrimTrailingWhiteSpace
+  au!
+  au BufWritePre * %s/\s\+$//e
+  au BufWritePre * %s/\n\+\%$//e
+augroup END
 
 " --------------
 " Plugins
 " --------------
+" Function to conditionally enable/disable plugins. E.g: Plug 'XYZ', Cond(...),
 function! Cond(cond, ...)
   let opts = get(a:000, 0, {})
   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
@@ -137,8 +153,12 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'itchyny/lightline.vim'
     Plug 'junegunn/vim-peekaboo'
     Plug 'rstacruz/vim-closer'
-    " Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
-    " Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+    Plug 'kyazdani42/nvim-web-devicons'
+    Plug 'kyazdani42/nvim-tree.lua'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/vim-vsnip'
+    Plug 'lukas-reineke/indent-blankline.nvim'
   endif
 
   " Themes
@@ -157,17 +177,21 @@ highlight Sneak guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
 highlight SneakLabel guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
 highlight SneakLabelMask guifg=NONE ctermfg=NONE cterm=nocombine
 
-" Plugins config
+" --------------
+" Plugin config
+" --------------
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:sneak#label = 1
+let g:sneak#prompt = "👞"
 
 if !exists('g:vscode')
 
-" --------------
 " Telescope
-" --------------
 lua <<EOF
 require('telescope').setup {
+  defaults = {
+    path_display = { "shorten" },
+  },
   extensions = {
     fzf = {
       fuzzy = true,                    -- false will only do exact matching
@@ -179,9 +203,7 @@ require('telescope').setup {
 require('telescope').load_extension('fzf')
 EOF
 
-" --------------
 " Treesitter
-" --------------
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
@@ -193,15 +215,62 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-
-" --------------
 " LSP
-" --------------
 lua << EOF
-  local lsp = require "lspconfig"
-  -- local coq = require "coq"
-  -- lsp.tsserver.setup(coq.lsp_ensure_capabilities())
-  -- lsp.tsserver.setup()
+local cmp = require'cmp'
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
+  },
+  sources = {
+    { name = 'nvim_lsp' }
+  },
+  mapping = {
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    })
+  }
+}
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+local lsp = require "lspconfig"
+lsp.tsserver.setup {
+  capabilities = capabilities,
+}
+
+lsp.efm.setup {
+  cmd = { "efm-langserver", "-logfile", "/Users/i505533/Desktop/efm-log.txt", "-loglevel", "4" },
+  filetypes = { "javascript", "typescript" },
+  init_options = {},
+  settings = {
+    rootMarkers = { ".git" },
+    lintDebounce = 500,
+    languages = {
+      typescript = {
+        {
+          lintCommand = "./node_modules/.bin/eslint -f visualstudio --stdin --stdin-filename ${INPUT}",
+          lintIgnoreExitCode = true,
+          lintStdin = true,
+          lintFormats = {
+            "%f(%l,%c): %tarning %m",
+            "%f(%l,%c): %trror %m"
+          }
+        }
+      }
+    }
+  }
+}
+
 EOF
 
 endif
