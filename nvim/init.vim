@@ -216,6 +216,8 @@ EOF
 
 " LSP
 lua << EOF
+
+-- Completion
 local cmp = require'cmp'
 cmp.setup {
   snippet = {
@@ -242,33 +244,73 @@ cmp.setup {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
+-- LSP config
+local on_lsp_attach = function (client)
+  -- If the lsp server support formatting format the buffer on save.
+  if client.resolved_capabilities.document_formatting then
+      vim.cmd [[augroup Format]]
+      vim.cmd [[autocmd! * <buffer>]]
+      vim.cmd [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
+      vim.cmd [[augroup END]]
+  end
+end
+
 local lsp = require "lspconfig"
 lsp.tsserver.setup {
   capabilities = capabilities,
+  on_attach = function (client)
+    -- Disable document formatting for tsserver as efm will do this
+    client.resolved_capabilities.document_formatting = false
+    on_lsp_attach(client)
+  end
 }
 
 lsp.efm.setup {
-  cmd = { "efm-langserver", "-logfile", "/Users/i505533/Desktop/efm-log.txt", "-loglevel", "4" },
+  on_attach = on_lsp_attach,
   filetypes = { "javascript", "typescript" },
-  init_options = {},
+  init_options = {
+    documentFormatting = true
+  },
   settings = {
     rootMarkers = { ".git" },
     lintDebounce = 500,
     languages = {
       typescript = {
         {
-          lintCommand = "./node_modules/.bin/eslint -f visualstudio --stdin --stdin-filename ${INPUT}",
+          lintCommand = "eslint_d --cache -f visualstudio --stdin --stdin-filename ${INPUT}",
           lintIgnoreExitCode = true,
           lintStdin = true,
           lintFormats = {
             "%f(%l,%c): %tarning %m",
             "%f(%l,%c): %trror %m"
-          }
+          },
+          formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}",
+          formatStdin = true
         }
       }
     }
   }
 }
+
+-- LSP handlers
+vim.lsp.handlers["textDocument/formatting"] = function(err, result, ctx)
+  -- Used to format the buffer in an async way.
+  if err ~= nil or result == nil then
+      return
+  end
+  -- if
+  --     vim.api.nvim_buf_get_var(ctx.bufnr, "init_changedtick") == vim.api.nvim_buf_get_var(ctx.bufnr, "changedtick")
+  -- then
+    local view = vim.fn.winsaveview()
+    vim.lsp.util.apply_text_edits(result, ctx.bufnr)
+    vim.fn.winrestview(view)
+    if ctx.bufnr == vim.api.nvim_get_current_buf() then
+        vim.b.saving_format = true
+        vim.cmd [[update]]
+        vim.b.saving_format = false
+    end
+  -- end
+end
 
 EOF
 
