@@ -134,31 +134,30 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 call plug#begin(stdpath('data') . '/plugged')
   " Plugins
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-repeat'
-  Plug 'tpope/vim-commentary'
-  Plug 'unblevable/quick-scope'
-  Plug 'machakann/vim-highlightedyank'
-  Plug 'suy/vim-context-commentstring'
-  Plug 'justinmk/vim-sneak'
+  Plug 'tpope/vim-surround' " Provides mappings to easily change surroundings in pairs.
+  Plug 'tpope/vim-repeat' " Makes plugin actions repeatable using dot.
+  Plug 'tpope/vim-commentary' " Commenting.
+  Plug 'unblevable/quick-scope' " Highlight unique character in every word to help with f, F.
+  Plug 'machakann/vim-highlightedyank' " Highlight yanked lines.
+  Plug 'suy/vim-context-commentstring' " Makes it possible to use vim-commentary with files which include different types. E.g: javascript in html
+  Plug 'justinmk/vim-sneak' " Jump vertically using two characters.
 
   " Disable certain plugins for VSCode
   if !exists('g:vscode')
-    Plug 'nvim-lua/plenary.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-    Plug 'neovim/nvim-lspconfig'
-    Plug 'andymass/vim-matchup'
-    Plug 'itchyny/lightline.vim'
-    Plug 'junegunn/vim-peekaboo'
-    Plug 'rstacruz/vim-closer'
-    Plug 'kyazdani42/nvim-web-devicons'
-    Plug 'kyazdani42/nvim-tree.lua'
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'hrsh7th/nvim-cmp'
-    Plug 'hrsh7th/vim-vsnip'
-    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'nvim-lua/plenary.nvim' " Dependency for a lot of lua plugins. Packages many lua utility functions.
+    Plug 'nvim-telescope/telescope.nvim' " Fuzzy file finder.
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " Makes fuzzy finding in telescope faster.
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlighting and other stuff.
+    Plug 'neovim/nvim-lspconfig' " Used to configure neovim lsp for different lsp servers.
+    Plug 'itchyny/lightline.vim' " Statusbar.
+    Plug 'junegunn/vim-peekaboo' " Displays a right buffer to view register content & select the desired register before pasting.
+    Plug 'rstacruz/vim-closer' " Automatically inserts brackets when pressing enter.
+    Plug 'kyazdani42/nvim-tree.lua' " Sidebar which displays the current working-tree (files).
+    Plug 'kyazdani42/nvim-web-devicons' " Icons for nvim-tree.
+    Plug 'hrsh7th/nvim-cmp' " Autocompletion plugin.
+    Plug 'hrsh7th/cmp-nvim-lsp' " LSP source for nvim-cmp. Is required to display lsp content in the autocomplete popover.
+    Plug 'hrsh7th/vim-vsnip' " Snipped engine used by nvim-cmp. Used to insert code snippets.
+    Plug 'lukas-reineke/indent-blankline.nvim' " Display indentation lines.
   endif
 
   " Themes
