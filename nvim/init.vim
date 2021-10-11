@@ -65,6 +65,8 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fs <cmd>Telescope lsp_document_symbols<cr>
+nnoremap <leader>fd <cmd>Telescope lsp_document_diagnostics<cr>
 
 " LSP keymaps
 nnoremap gh <cmd>lua vim.lsp.buf.hover()<CR>
