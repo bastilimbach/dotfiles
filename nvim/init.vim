@@ -151,7 +151,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'neovim/nvim-lspconfig' " Used to configure neovim lsp for different lsp servers.
     Plug 'itchyny/lightline.vim' " Statusbar.
     Plug 'junegunn/vim-peekaboo' " Displays a right buffer to view register content & select the desired register before pasting.
-    Plug 'rstacruz/vim-closer' " Automatically inserts brackets when pressing enter.
+    Plug 'jiangmiao/auto-pairs' " Automatically inserts matching brackets & quotes.
     Plug 'kyazdani42/nvim-tree.lua' " Sidebar which displays the current working-tree (files).
     Plug 'kyazdani42/nvim-web-devicons' " Icons for nvim-tree.
     Plug 'hrsh7th/nvim-cmp' " Autocompletion plugin.
