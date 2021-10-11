@@ -185,6 +185,11 @@ let g:sneak#prompt = "👞"
 
 if !exists('g:vscode')
 
+" Nvim Tree
+lua <<EOF
+require('nvim-tree').setup {}
+EOF
+
 " Telescope
 lua <<EOF
 require('telescope').setup {
