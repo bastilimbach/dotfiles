@@ -219,7 +219,7 @@ EOF
 lua <<EOF
 require('telescope').setup {
   defaults = {
-    path_display = { "shorten" },
+    path_display = { "truncate" },
   },
   extensions = {
     fzf = {
