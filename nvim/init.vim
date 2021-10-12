@@ -23,10 +23,10 @@ if exists('g:vscode')
 endif
 
 " Navigate between windows
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <silent> <C-h> :call WinMove('h')<cr>
+nnoremap <silent> <C-j> :call WinMove('j')<cr>
+nnoremap <silent> <C-k> :call WinMove('k')<cr>
+nnoremap <silent> <C-l> :call WinMove('l')<cr>
 if exists('g:vscode')
   nnoremap <C-h> <Cmd>call VSCodeNotify('workbench.action.focusLeftGroup')<CR>
   nnoremap <C-j> <Cmd>call VSCodeNotify('workbench.action.focusBelowGroup')<CR>
@@ -104,6 +104,10 @@ set copyindent
 set listchars=space:·,eol:↴,precedes:«,extends:»,trail:~
 set list
 
+" Splits
+set splitbelow
+set splitright
+
 " --------------
 " Autocommands
 " --------------
@@ -114,7 +118,7 @@ augroup TrimTrailingWhiteSpace
 augroup END
 
 " --------------
-" Plugins
+" Utility functions
 " --------------
 " Function to conditionally enable/disable plugins. E.g: Plug 'XYZ', Cond(...),
 function! Cond(cond, ...)
@@ -122,6 +126,23 @@ function! Cond(cond, ...)
   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
 
+" Either creates a new window or moves the cursor to an existing one
+func! WinMove(key)
+  let t:curwin = winnr()
+  exec "wincmd ".a:key
+  if (t:curwin == winnr())
+    if (match(a:key,'[jk]'))
+      wincmd v
+    else
+      wincmd s
+    endif
+    exec "wincmd ".a:key
+  endif
+endfu
+
+" --------------
+" Plugins
+" --------------
 " Install vim-plug if not found
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
