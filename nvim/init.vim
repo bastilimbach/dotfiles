@@ -59,6 +59,7 @@ vnoremap <S-TAB> <
 
 " Plugin keymaps
 nnoremap <leader>v <cmd>NvimTreeToggle<CR>
+nnoremap <leader>xx <cmd>TroubleToggle<CR>
 
 " Telescope keymaps
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -181,6 +182,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'hrsh7th/cmp-nvim-lsp' " LSP source for nvim-cmp. Is required to display lsp content in the autocomplete popover.
     Plug 'hrsh7th/vim-vsnip' " Snipped engine used by nvim-cmp. Used to insert code snippets.
     Plug 'lukas-reineke/indent-blankline.nvim' " Display indentation lines.
+    Plug 'folke/trouble.nvim' " Display diagnostics in a pretty list.
   endif
 
   " Themes
