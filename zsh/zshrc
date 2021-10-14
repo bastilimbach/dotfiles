@@ -21,7 +21,7 @@ export PLATIN_JAVA="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/H
 export PLUGIN_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/fre"
 
 # Source ~/.profile if it exists
-if [ -f "~/.profile" ]; then
+if [ -f ~/.profile ]; then
     source ~/.profile
 fi
 
