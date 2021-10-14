@@ -32,6 +32,11 @@ for file in $DOTFILES/**/aliases.zsh; do
   source "$file"
 done
 
+# Source ~/.profile if it exists
+if [ -f "~/.profile" ]; then
+    source ~/.profile
+fi
+
 # Plugins
 zinit for \
   zsh-users/zsh-autosuggestions \
