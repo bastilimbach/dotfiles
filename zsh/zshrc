@@ -20,6 +20,11 @@ export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Hom
 export PLATIN_JAVA="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/fre"
 export PLUGIN_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/fre"
 
+# Source ~/.profile if it exists
+if [ -f "~/.profile" ]; then
+    source ~/.profile
+fi
+
 # Source zinit zsh plugin manager
 source $DOTFILES/.zinit/zinit.zsh
 autoload -Uz compinit && compinit
@@ -31,11 +36,6 @@ source $DOTFILES/zsh/config.zsh
 for file in $DOTFILES/**/aliases.zsh; do
   source "$file"
 done
-
-# Source ~/.profile if it exists
-if [ -f "~/.profile" ]; then
-    source ~/.profile
-fi
 
 # Plugins
 zinit for \
