@@ -71,6 +71,13 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fs <cmd>Telescope lsp_document_symbols<cr>
 nnoremap <leader>fd <cmd>Telescope lsp_document_diagnostics<cr>
 
+" Floaterm keymaps
+nnoremap <silent> <leader>t :FloatermToggle<CR>
+tnoremap <silent> <leader>t <C-\><C-n>:FloatermToggle<CR>
+tnoremap <silent> <leader>n <C-\><C-n>:FloatermPrev<CR>
+tnoremap <silent> <leader>m <C-\><C-n>:FloatermNext<CR>
+tnoremap <silent> <leader>k <C-\><C-n>:FloatermKill<CR>
+
 " LSP keymaps
 nnoremap gh <cmd>lua vim.lsp.buf.hover()<CR>
 
@@ -185,6 +192,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'hrsh7th/vim-vsnip' " Snipped engine used by nvim-cmp. Used to insert code snippets.
     Plug 'lukas-reineke/indent-blankline.nvim' " Display indentation lines.
     Plug 'folke/trouble.nvim' " Display diagnostics in a pretty list.
+    Plug 'voldikss/vim-floaterm' " Use the terminal in a floating/popup window.
   endif
 
   " Themes
@@ -209,6 +217,7 @@ highlight SneakLabelMask guifg=NONE ctermfg=NONE cterm=nocombine
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:sneak#label = 1
 let g:sneak#prompt = "👞"
+let g:floaterm_title = "($1|$2)"
 
 if !exists('g:vscode')
 
