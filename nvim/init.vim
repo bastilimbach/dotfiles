@@ -231,6 +231,14 @@ lua <<EOF
 require('telescope').setup {
   defaults = {
     path_display = { "truncate" },
+    mappings = {
+      i = {
+        ["<ESC>"] = require('telescope.actions').close,
+      },
+      n = {
+        ["q"] = require('telescope.actions').close,
+      }
+    }
   },
   extensions = {
     fzf = {
