@@ -188,8 +188,10 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'kyazdani42/nvim-tree.lua' " Sidebar which displays the current working-tree (files).
     Plug 'kyazdani42/nvim-web-devicons' " Icons for nvim-tree.
     Plug 'hrsh7th/nvim-cmp' " Autocompletion plugin.
-    Plug 'hrsh7th/cmp-nvim-lsp' " LSP source for nvim-cmp. Is required to display lsp content in the autocomplete popover.
     Plug 'hrsh7th/vim-vsnip' " Snipped engine used by nvim-cmp. Used to insert code snippets.
+    Plug 'hrsh7th/cmp-nvim-lsp' " LSP source for nvim-cmp. Is required to display lsp content in the autocomplete popover.
+    Plug 'hrsh7th/cmp-vsnip' " VSnip source for nvim-cmp.
+    Plug 'hrsh7th/cmp-buffer' " Buffer source for nvim-cmp.
     Plug 'lukas-reineke/indent-blankline.nvim' " Display indentation lines.
     Plug 'folke/trouble.nvim' " Display diagnostics in a pretty list.
     Plug 'voldikss/vim-floaterm' " Use the terminal in a floating/popup window.
@@ -276,7 +278,9 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = 'nvim_lsp' }
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+    { name = 'buffer' }
   },
   mapping = {
     ['<Tab>'] = cmp.mapping.select_next_item(),
