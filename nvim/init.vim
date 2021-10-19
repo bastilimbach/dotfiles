@@ -139,14 +139,14 @@ endfunction
 " Either creates a new window or moves the cursor to an existing one
 func! WinMove(key)
   let t:curwin = winnr()
-  exec "wincmd ".a:key
+  exec 'wincmd '.a:key
   if (t:curwin == winnr())
     if (match(a:key,'[jk]'))
       wincmd v
     else
       wincmd s
     endif
-    exec "wincmd ".a:key
+    exec 'wincmd '.a:key
   endif
 endfu
 
@@ -219,8 +219,8 @@ highlight SneakLabelMask guifg=NONE ctermfg=NONE cterm=nocombine
 " --------------
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:sneak#label = 1
-let g:sneak#prompt = "👞"
-let g:floaterm_title = "($1|$2)"
+let g:sneak#prompt = '👞'
+let g:floaterm_title = '($1|$2)'
 
 if !exists('g:vscode')
 
@@ -231,15 +231,16 @@ EOF
 
 " Telescope
 lua <<EOF
-require('telescope').setup {
+local telescope = require('telescope')
+telescope.setup {
   defaults = {
-    path_display = { "truncate" },
+    path_display = { 'truncate' },
     mappings = {
       i = {
-        ["<ESC>"] = require('telescope.actions').close,
+        ['<ESC>'] = require('telescope.actions').close,
       },
       n = {
-        ["q"] = require('telescope.actions').close,
+        ['q'] = require('telescope.actions').close,
       }
     }
   },
@@ -251,12 +252,12 @@ require('telescope').setup {
     }
   }
 }
-require('telescope').load_extension('fzf')
+telescope.load_extension('fzf')
 EOF
 
 " Treesitter
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true,
   },
@@ -270,11 +271,11 @@ EOF
 lua << EOF
 
 -- Completion
-local cmp = require'cmp'
+local cmp = require('cmp')
 cmp.setup {
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      vim.fn['vsnip#anonymous'](args.body)
     end,
   },
   sources = {
@@ -309,7 +310,7 @@ local on_lsp_attach = function (client)
   end
 end
 
-local lsp = require "lspconfig"
+local lsp = require('lspconfig')
 lsp.tsserver.setup {
   capabilities = capabilities,
   on_attach = function (client)
@@ -321,24 +322,24 @@ lsp.tsserver.setup {
 
 lsp.efm.setup {
   on_attach = on_lsp_attach,
-  filetypes = { "javascript", "typescript" },
+  filetypes = { 'javascript', 'typescript' },
   init_options = {
     documentFormatting = true
   },
   settings = {
-    rootMarkers = { ".git" },
+    rootMarkers = { '.gir' },
     lintDebounce = 500,
     languages = {
       typescript = {
         {
-          lintCommand = "eslint_d --cache -f visualstudio --stdin --stdin-filename ${INPUT}",
+          lintCommand = 'eslint_d --cache -f visualstudio --stdin --stdin-filename ${INPUT}',
           lintIgnoreExitCode = true,
           lintStdin = true,
           lintFormats = {
-            "%f(%l,%c): %tarning %m",
-            "%f(%l,%c): %trror %m"
+            '%f(%l,%c): %tarning %m',
+            '%f(%l,%c): %trror %m'
           },
-          formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}",
+          formatCommand = 'eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}',
           formatStdin = true
         }
       }
@@ -347,13 +348,13 @@ lsp.efm.setup {
 }
 
 -- LSP handlers
-vim.lsp.handlers["textDocument/formatting"] = function(err, result, ctx)
+vim.lsp.handlers['textDocument/formatting'] = function(err, result, ctx)
   -- Used to format the buffer in an async way.
   if err ~= nil or result == nil then
       return
   end
   -- if
-  --     vim.api.nvim_buf_get_var(ctx.bufnr, "init_changedtick") == vim.api.nvim_buf_get_var(ctx.bufnr, "changedtick")
+  --     vim.api.nvim_buf_get_var(ctx.bufnr, 'init_changedticr') == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick')
   -- then
     local view = vim.fn.winsaveview()
     vim.lsp.util.apply_text_edits(result, ctx.bufnr)
