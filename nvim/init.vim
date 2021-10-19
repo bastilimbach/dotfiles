@@ -182,7 +182,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " Makes fuzzy finding in telescope faster.
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlighting and other stuff.
     Plug 'neovim/nvim-lspconfig' " Used to configure neovim lsp for different lsp servers.
-    Plug 'itchyny/lightline.vim' " Statusbar.
+    Plug 'hoob3rt/lualine.nvim' " Statusbar
     Plug 'junegunn/vim-peekaboo' " Displays a right buffer to view register content & select the desired register before pasting.
     Plug 'jiangmiao/auto-pairs' " Automatically inserts matching brackets & quotes.
     Plug 'kyazdani42/nvim-tree.lua' " Sidebar which displays the current working-tree (files).
@@ -227,6 +227,13 @@ if !exists('g:vscode')
 " Nvim Tree
 lua <<EOF
 require('nvim-tree').setup {}
+EOF
+
+" Lualine
+lua <<EOF
+require('lualine').setup {
+  extensions = { 'nvim-tree' }
+}
 EOF
 
 " Telescope
