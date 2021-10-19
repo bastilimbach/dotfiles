@@ -90,7 +90,7 @@ set number
 set relativenumber
 set undolevels=1000
 set noshowmode
-set termguicolors
+set completeopt=menu,menuone,noselect
 
 " Backup
 set noswapfile
@@ -196,13 +196,14 @@ call plug#begin(stdpath('data') . '/plugged')
   endif
 
   " Themes
-  Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'Pocco81/Catppuccino.nvim'
 call plug#end()
 
 " --------------
 " Colorscheme & Highlights
 " --------------
-colorscheme dracula
+colorscheme neon_latte
+set termguicolors
 set background=dark
 highlight Normal guibg=NONE ctermbg=NONE
 highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
