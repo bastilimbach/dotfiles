@@ -266,6 +266,21 @@ EOF
 " Treesitter
 lua <<EOF
 require('nvim-treesitter.configs').setup {
+  ensure_installed = {
+    'html',
+    'javascript',
+    'typescript',
+    'json',
+    'json5',
+    'jsonc',
+    'regex',
+    'rust',
+    'vim',
+    'vue',
+    'yaml',
+    'css',
+    'bash'
+  },
   highlight = {
     enable = true,
   },
