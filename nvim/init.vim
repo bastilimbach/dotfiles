@@ -172,7 +172,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'tpope/vim-commentary' " Commenting.
   Plug 'unblevable/quick-scope' " Highlight unique character in every word to help with f, F.
   Plug 'machakann/vim-highlightedyank' " Highlight yanked lines.
-  Plug 'suy/vim-context-commentstring' " Makes it possible to use vim-commentary with files which include different types. E.g: javascript in html
+  Plug 'JoosepAlviste/nvim-ts-context-commentstring' " Makes it possible to use vim-commentary with files which include different types. E.g: javascript in html
   Plug 'justinmk/vim-sneak' " Jump vertically using two characters.
 
   " Disable certain plugins for VSCode
@@ -287,6 +287,9 @@ require('nvim-treesitter.configs').setup {
   indent = {
     enable = true,
   },
+  context_commentstring = {
+    enable = true,
+  }
 }
 EOF
 
