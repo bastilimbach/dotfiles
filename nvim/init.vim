@@ -192,6 +192,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'hrsh7th/cmp-nvim-lsp' " LSP source for nvim-cmp. Is required to display lsp content in the autocomplete popover.
     Plug 'hrsh7th/cmp-vsnip' " VSnip source for nvim-cmp.
     Plug 'hrsh7th/cmp-buffer' " Buffer source for nvim-cmp.
+    Plug 'ray-x/lsp_signature.nvim' " Shows function signature when you type.
     Plug 'lukas-reineke/indent-blankline.nvim' " Display indentation lines.
     Plug 'folke/trouble.nvim' " Display diagnostics in a pretty list.
     Plug 'voldikss/vim-floaterm' " Use the terminal in a floating/popup window.
@@ -315,6 +316,13 @@ local on_lsp_attach = function (client)
       vim.cmd [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
       vim.cmd [[augroup END]]
   end
+
+  require('lsp_signature').on_attach({
+    bind = true,
+    handler_opts = {
+      border = 'none'
+    }
+  })
 end
 
 local lsp = require('lspconfig')
