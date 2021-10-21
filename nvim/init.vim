@@ -251,7 +251,13 @@ EOF
 " Lualine
 lua <<EOF
 require('lualine').setup {
-  extensions = { 'nvim-tree' }
+  options = {
+    theme = 'iceberg_dark',
+  },
+  sections = {
+    lualine_x = { 'encoding', 'filetype' },
+  },
+  extensions = { 'nvim-tree' },
 }
 EOF
 
