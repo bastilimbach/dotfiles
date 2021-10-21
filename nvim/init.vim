@@ -245,7 +245,17 @@ if !exists('g:vscode')
 
 " Nvim Tree
 lua <<EOF
-require('nvim-tree').setup {}
+require('nvim-tree').setup {
+  diagnostics = {
+    enable = true
+  },
+  update_focused_file = {
+    enable = true,
+  },
+  view = {
+    auto_resize = true
+  }
+}
 EOF
 
 " Lualine
