@@ -196,16 +196,15 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'lukas-reineke/indent-blankline.nvim' " Display indentation lines.
     Plug 'folke/trouble.nvim' " Display diagnostics in a pretty list.
     Plug 'voldikss/vim-floaterm' " Use the terminal in a floating/popup window.
-  endif
 
-  " Themes
-  Plug 'Pocco81/Catppuccino.nvim'
+    " Themes
+    Plug 'Pocco81/Catppuccino.nvim'
+  endif
 call plug#end()
 
 " --------------
 " Colorscheme & Highlights
 " --------------
-colorscheme neon_latte
 set termguicolors
 set background=dark
 highlight Normal guibg=NONE ctermbg=NONE
@@ -214,6 +213,25 @@ highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=und
 highlight Sneak guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
 highlight SneakLabel guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
 highlight SneakLabelMask guifg=NONE ctermfg=NONE cterm=nocombine
+
+if !exists('g:vscode')
+
+" Theme settings
+lua <<EOF
+require('catppuccino').setup {
+  colorscheme = 'neon_latte',
+  term_colors = true,
+  integrations = {
+    telescope = true
+  },
+  nvimtree = {
+    enabled = true
+  }
+}
+EOF
+colorscheme catppuccino
+
+endif
 
 " --------------
 " Plugin config
