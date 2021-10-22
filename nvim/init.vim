@@ -209,18 +209,8 @@ call plug#end()
 " --------------
 " Colorscheme & Highlights
 " --------------
-set termguicolors
-set background=dark
-highlight Normal guibg=NONE ctermbg=NONE
-highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-highlight Sneak guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
-highlight SneakLabel guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
-highlight SneakLabelMask guifg=NONE ctermfg=NONE cterm=nocombine
-
 if !exists('g:vscode')
-
-" Theme settings
+" Require theme and set configuration
 lua <<EOF
 require('catppuccino').setup {
   colorscheme = 'neon_latte',
@@ -234,8 +224,17 @@ require('catppuccino').setup {
 }
 EOF
 colorscheme catppuccino
-
 endif
+
+set background=dark
+set termguicolors
+
+" Custom highlights
+highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+highlight Sneak guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
+highlight SneakLabel guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
+highlight SneakLabelMask guifg=NONE ctermfg=NONE cterm=nocombine
 
 " --------------
 " Plugin config
