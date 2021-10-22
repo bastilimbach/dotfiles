@@ -80,6 +80,10 @@ tnoremap <silent> <leader>k <C-\><C-n>:FloatermKill<CR>
 
 " LSP keymaps
 nnoremap gh <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap gr <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap gi <cmd>lua vim.lsp.buf.implementation()<CR>
 
 " --------------
 " General settings
