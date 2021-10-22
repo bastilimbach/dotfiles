@@ -265,7 +265,11 @@ require('lualine').setup {
     theme = 'iceberg_dark',
   },
   sections = {
-    lualine_x = { 'encoding', 'filetype' },
+    lualine_x = {
+      'encoding',
+      'filetype',
+      condition = function() return false end,
+    },
   },
   extensions = { 'nvim-tree' },
 }
@@ -373,7 +377,9 @@ local on_lsp_attach = function (client)
     bind = true,
     handler_opts = {
       border = 'none'
-    }
+    },
+    hint_enable = false,
+    padding = ' '
   })
 end
 
