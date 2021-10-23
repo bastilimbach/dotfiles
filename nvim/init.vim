@@ -357,7 +357,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
-    { name = 'buffer' }
+    { name = 'buffer', keyword_length = 5 }
   },
   mapping = {
     ['<Tab>'] = cmp.mapping.select_next_item(),
