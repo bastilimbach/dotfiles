@@ -201,6 +201,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'lukas-reineke/indent-blankline.nvim' " Display indentation lines.
     Plug 'folke/trouble.nvim' " Display diagnostics in a pretty list.
     Plug 'voldikss/vim-floaterm' " Use the terminal in a floating/popup window.
+    Plug 'sindrets/diffview.nvim' " Single tabpage interface for easily cycling through git diffs.
 
     " Themes
     Plug 'Pocco81/Catppuccino.nvim'
