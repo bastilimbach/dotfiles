@@ -197,6 +197,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'hrsh7th/cmp-vsnip' " VSnip source for nvim-cmp.
     Plug 'hrsh7th/cmp-buffer' " Buffer source for nvim-cmp.
     Plug 'ray-x/lsp_signature.nvim' " Shows function signature when you type.
+    Plug 'onsails/lspkind-nvim' " Adds pictograms to completion popups.
     Plug 'lukas-reineke/indent-blankline.nvim' " Display indentation lines.
     Plug 'folke/trouble.nvim' " Display diagnostics in a pretty list.
     Plug 'voldikss/vim-floaterm' " Use the terminal in a floating/popup window.
@@ -370,6 +371,16 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     })
+  },
+  formatting = {
+    format = require("lspkind").cmp_format({
+      with_text = true,
+      menu = ({
+        nvim_lsp = "[LSP]",
+        vsnip = "[Snippet]",
+        buffer = "[Buffer]",
+      })
+    }),
   }
 }
 local capabilities = vim.lsp.protocol.make_client_capabilities()
