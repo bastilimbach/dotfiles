@@ -277,7 +277,7 @@ require('lualine').setup {
           error = '',
           warn = '',
           info = '',
-          hint = ''
+          hint = ''
         }
       },
       'encoding',
