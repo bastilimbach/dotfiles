@@ -186,7 +186,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " Makes fuzzy finding in telescope faster.
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlighting and other stuff.
     Plug 'neovim/nvim-lspconfig' " Used to configure neovim lsp for different lsp servers.
-    Plug 'hoob3rt/lualine.nvim' " Statusbar
+    Plug 'nvim-lualine/lualine.nvim' " Statusbar
     Plug 'junegunn/vim-peekaboo' " Displays a right buffer to view register content & select the desired register before pasting.
     Plug 'jiangmiao/auto-pairs' " Automatically inserts matching brackets & quotes.
     Plug 'kyazdani42/nvim-tree.lua' " Sidebar which displays the current working-tree (files).
@@ -270,19 +270,40 @@ require('lualine').setup {
     theme = 'iceberg_dark',
   },
   sections = {
-    lualine_x = {
+    lualine_a = { 'mode' },
+    lualine_b = {
+      {
+        'branch',
+        cond = function() return vim.fn.winwidth(0) > 80 end
+      },
+      {
+        'diff',
+        cond = function() return vim.fn.winwidth(0) > 80 end
+      },
       {
         'diagnostics',
         sources = { 'nvim_lsp' },
-        symbols = {
-          error = '',
-          warn = '',
-          info = '',
-          hint = ''
-        }
+        cond = function() return vim.fn.winwidth(0) > 50 end
       },
-      'encoding',
-      condition = function() return false end,
+    },
+    lualine_c = { 'filename' },
+    lualine_x = {
+      {
+        'encoding',
+        cond = function() return vim.fn.winwidth(0) > 100 end
+      }
+    },
+    lualine_y = {
+      {
+        'progress',
+        cond = function() return vim.fn.winwidth(0) > 100 end
+      }
+    },
+    lualine_z = {
+      {
+        'location',
+        cond = function() return vim.fn.winwidth(0) > 100 end
+      }
     },
   },
   extensions = { 'nvim-tree' },
