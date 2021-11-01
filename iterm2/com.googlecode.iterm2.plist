@@ -8,6 +8,8 @@
 	<integer>10</integer>
 	<key>BadgeTopMargin</key>
 	<integer>10</integer>
+	<key>CloseBookmarksWindowAfterOpening</key>
+	<true/>
 	<key>Default Bookmark Guid</key>
 	<string>FF5D7322-CEAB-4BCE-BCAC-C62F78DE49A9</string>
 	<key>DimBackgroundWindows</key>
@@ -724,7 +726,7 @@
 			<key>ASCII Anti Aliased</key>
 			<true/>
 			<key>ASCII Ligatures</key>
-			<true/>
+			<false/>
 			<key>AWDS Pane Directory</key>
 			<string></string>
 			<key>AWDS Pane Option</key>
@@ -1423,7 +1425,7 @@
 	<key>OpenArrangementAtStartup</key>
 	<false/>
 	<key>OpenBookmark</key>
-	<true/>
+	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<false/>
 	<key>PMPrintingExpandedStateForPrint2</key>
@@ -1468,7 +1470,7 @@
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SoundForEsc</key>
