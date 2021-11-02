@@ -202,6 +202,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'folke/trouble.nvim' " Display diagnostics in a pretty list.
     Plug 'voldikss/vim-floaterm' " Use the terminal in a floating/popup window.
     Plug 'sindrets/diffview.nvim' " Single tabpage interface for easily cycling through git diffs.
+    Plug 'rmagatti/auto-session' " Automatically creates sessions on exit & restores them as soon as vim is started.
 
     " Themes
     Plug 'Pocco81/Catppuccino.nvim'
