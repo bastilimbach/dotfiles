@@ -19,6 +19,7 @@ nnoremap Y y$
 " Save & Quit
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
+nnoremap <leader>Q :qa<CR>
 if exists('g:vscode')
   nnoremap <leader>w <Cmd>call VSCodeNotify('workbench.action.files.save')<CR>
   nnoremap <leader>q <Cmd>call VSCodeNotify('workbench.action.closeWindow')<CR>
