@@ -73,10 +73,9 @@ nnoremap <leader>fd <cmd>Telescope lsp_document_diagnostics<cr>
 
 " Floaterm keymaps
 nnoremap <silent> <leader>t :FloatermToggle<CR>
-tnoremap <silent> <leader>t <C-\><C-n>:FloatermToggle<CR>
-tnoremap <silent> <leader>n <C-\><C-n>:FloatermPrev<CR>
-tnoremap <silent> <leader>m <C-\><C-n>:FloatermNext<CR>
-tnoremap <silent> <leader>k <C-\><C-n>:FloatermKill<CR>
+nnoremap <silent> <leader>n :FloatermPrev<CR>
+nnoremap <silent> <leader>m :FloatermNext<CR>
+nnoremap <silent> <leader>k :FloatermKill<CR>
 
 " LSP keymaps
 nnoremap gh <cmd>lua vim.lsp.buf.hover()<CR>
