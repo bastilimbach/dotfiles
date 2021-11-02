@@ -314,6 +314,7 @@ lua <<EOF
 local telescope = require('telescope')
 telescope.setup {
   defaults = {
+    file_ignore_patterns = { '.git' },
     path_display = { 'truncate' },
     mappings = {
       i = {
@@ -322,6 +323,11 @@ telescope.setup {
       n = {
         ['q'] = require('telescope.actions').close,
       }
+    }
+  },
+  pickers = {
+    find_files = {
+      hidden = true
     }
   },
   extensions = {
