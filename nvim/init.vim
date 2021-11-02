@@ -213,20 +213,20 @@ call plug#end()
 " Colorscheme & Highlights
 " --------------
 if !exists('g:vscode')
-" Require theme and set configuration
 lua <<EOF
-require('catppuccino').setup {
-  colorscheme = 'neon_latte',
-  term_colors = true,
-  integrations = {
-    telescope = true
-  },
-  nvimtree = {
-    enabled = true
+  -- Require theme and set configuration
+  require('catppuccino').setup {
+    colorscheme = 'neon_latte',
+    term_colors = true,
+    integrations = {
+      telescope = true
+    },
+    nvimtree = {
+      enabled = true
+    }
   }
-}
 EOF
-colorscheme catppuccino
+  colorscheme catppuccino
 endif
 
 set background=dark
@@ -248,251 +248,239 @@ let g:sneak#prompt = '👞'
 let g:floaterm_title = '($1|$2)'
 
 if !exists('g:vscode')
-
-" Nvim Tree
 lua <<EOF
-require('nvim-tree').setup {
-  diagnostics = {
-    enable = true
-  },
-  update_focused_file = {
-    enable = true,
-  },
-  view = {
-    auto_resize = true
-  }
-}
-EOF
-
-" Lualine
-lua <<EOF
-require('lualine').setup {
-  options = {
-    theme = 'iceberg_dark',
-  },
-  sections = {
-    lualine_a = { 'mode' },
-    lualine_b = {
-      {
-        'branch',
-        cond = function() return vim.fn.winwidth(0) > 80 end
-      },
-      {
-        'diff',
-        cond = function() return vim.fn.winwidth(0) > 80 end
-      },
-      {
-        'diagnostics',
-        sources = { 'nvim_lsp' },
-        cond = function() return vim.fn.winwidth(0) > 50 end
-      },
+  -- Nvim Tree
+  require('nvim-tree').setup {
+    diagnostics = {
+      enable = true
     },
-    lualine_c = { 'filename' },
-    lualine_x = {
-      {
-        'encoding',
-        cond = function() return vim.fn.winwidth(0) > 100 end
-      }
+    update_focused_file = {
+      enable = true,
     },
-    lualine_y = {
-      {
-        'progress',
-        cond = function() return vim.fn.winwidth(0) > 100 end
-      }
-    },
-    lualine_z = {
-      {
-        'location',
-        cond = function() return vim.fn.winwidth(0) > 100 end
-      }
-    },
-  },
-  extensions = { 'nvim-tree' },
-}
-EOF
-
-" Telescope
-lua <<EOF
-local telescope = require('telescope')
-telescope.setup {
-  defaults = {
-    file_ignore_patterns = { '.git' },
-    path_display = { 'truncate' },
-    mappings = {
-      i = {
-        ['<ESC>'] = require('telescope.actions').close,
-      },
-      n = {
-        ['q'] = require('telescope.actions').close,
-      }
-    }
-  },
-  pickers = {
-    find_files = {
-      hidden = true
-    }
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true,                    -- false will only do exact matching
-      override_generic_sorter = false, -- override the generic sorter
-      override_file_sorter = true,     -- override the file sorter
+    view = {
+      auto_resize = true
     }
   }
-}
-telescope.load_extension('fzf')
-EOF
 
-" Treesitter
-lua <<EOF
-require('nvim-treesitter.configs').setup {
-  ensure_installed = {
-    'html',
-    'javascript',
-    'typescript',
-    'json',
-    'json5',
-    'jsonc',
-    'regex',
-    'rust',
-    'vim',
-    'vue',
-    'yaml',
-    'css',
-    'bash'
-  },
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-  context_commentstring = {
-    enable = true,
+  -- Lualine
+  require('lualine').setup {
+    options = {
+      theme = 'iceberg_dark',
+    },
+    sections = {
+      lualine_a = { 'mode' },
+      lualine_b = {
+        {
+          'branch',
+          cond = function() return vim.fn.winwidth(0) > 80 end
+        },
+        {
+          'diff',
+          cond = function() return vim.fn.winwidth(0) > 80 end
+        },
+        {
+          'diagnostics',
+          sources = { 'nvim_lsp' },
+          cond = function() return vim.fn.winwidth(0) > 50 end
+        },
+      },
+      lualine_c = { 'filename' },
+      lualine_x = {
+        {
+          'encoding',
+          cond = function() return vim.fn.winwidth(0) > 100 end
+        }
+      },
+      lualine_y = {
+        {
+          'progress',
+          cond = function() return vim.fn.winwidth(0) > 100 end
+        }
+      },
+      lualine_z = {
+        {
+          'location',
+          cond = function() return vim.fn.winwidth(0) > 100 end
+        }
+      },
+    },
+    extensions = { 'nvim-tree' },
   }
-}
-EOF
 
-" LSP
-lua << EOF
+  -- Telescope
+  local telescope = require('telescope')
+  telescope.setup {
+    defaults = {
+      file_ignore_patterns = { '.git' },
+      path_display = { 'truncate' },
+      mappings = {
+        i = {
+          ['<ESC>'] = require('telescope.actions').close,
+        },
+        n = {
+          ['q'] = require('telescope.actions').close,
+        }
+      }
+    },
+    pickers = {
+      find_files = {
+        hidden = true
+      }
+    },
+    extensions = {
+      fzf = {
+        fuzzy = true,
+        override_generic_sorter = false,
+        override_file_sorter = true,
+      }
+    }
+  }
+  telescope.load_extension('fzf')
 
--- Completion
-local cmp = require('cmp')
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      vim.fn['vsnip#anonymous'](args.body)
-    end,
-  },
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
-    { name = 'buffer', keyword_length = 5 }
-  },
-  mapping = {
-    ['<Tab>'] = cmp.mapping.select_next_item(),
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    })
-  },
-  formatting = {
-    format = require("lspkind").cmp_format({
-      with_text = true,
-      menu = ({
-        nvim_lsp = "[LSP]",
-        vsnip = "[Snippet]",
-        buffer = "[Buffer]",
+  -- Treesitter
+  require('nvim-treesitter.configs').setup {
+    ensure_installed = {
+      'html',
+      'javascript',
+      'typescript',
+      'json',
+      'json5',
+      'jsonc',
+      'regex',
+      'rust',
+      'vim',
+      'vue',
+      'yaml',
+      'css',
+      'bash'
+    },
+    highlight = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
+    },
+    context_commentstring = {
+      enable = true,
+    }
+  }
+
+  -- LSP
+  -- Completion
+  local cmp = require('cmp')
+  cmp.setup {
+    snippet = {
+      expand = function(args)
+        vim.fn['vsnip#anonymous'](args.body)
+      end,
+    },
+    sources = {
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' },
+      { name = 'buffer', keyword_length = 5 }
+    },
+    mapping = {
+      ['<Tab>'] = cmp.mapping.select_next_item(),
+      ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
       })
-    }),
+    },
+    formatting = {
+      format = require("lspkind").cmp_format({
+        with_text = true,
+        menu = ({
+          nvim_lsp = "[LSP]",
+          vsnip = "[Snippet]",
+          buffer = "[Buffer]",
+        })
+      }),
+    }
   }
-}
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
--- LSP config
-local on_lsp_attach = function (client)
-  -- If the lsp server support formatting format the buffer on save.
-  if client.resolved_capabilities.document_formatting then
+  -- LSP config
+  local on_lsp_attach = function (client)
+    -- If the lsp server support formatting format the buffer on save.
+    if client.resolved_capabilities.document_formatting then
       vim.cmd [[augroup Format]]
       vim.cmd [[autocmd! * <buffer>]]
       vim.cmd [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
       vim.cmd [[augroup END]]
+    end
+
+    require('lsp_signature').on_attach({
+      bind = true,
+      handler_opts = {
+        border = 'none'
+      },
+      hint_enable = false,
+      padding = ' '
+    })
   end
 
-  require('lsp_signature').on_attach({
-    bind = true,
-    handler_opts = {
-      border = 'none'
+  local lsp = require('lspconfig')
+  lsp.tsserver.setup {
+    capabilities = capabilities,
+    on_attach = function (client)
+      -- Disable document formatting for tsserver as efm will do this
+      client.resolved_capabilities.document_formatting = false
+      on_lsp_attach(client)
+    end
+  }
+
+  local eslint_d = {
+    lintCommand = 'eslint_d --cache -f visualstudio --stdin --stdin-filename ${INPUT}',
+    lintIgnoreExitCode = true,
+    lintStdin = true,
+    lintFormats = {
+      '%f(%l,%c): %tarning %m',
+      '%f(%l,%c): %trror %m'
     },
-    hint_enable = false,
-    padding = ' '
-  })
-end
+    formatCommand = 'eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}',
+    formatStdin = true
+  }
 
-local lsp = require('lspconfig')
-lsp.tsserver.setup {
-  capabilities = capabilities,
-  on_attach = function (client)
-    -- Disable document formatting for tsserver as efm will do this
-    client.resolved_capabilities.document_formatting = false
-    on_lsp_attach(client)
-  end
-}
-
-local eslint_d = {
-  lintCommand = 'eslint_d --cache -f visualstudio --stdin --stdin-filename ${INPUT}',
-  lintIgnoreExitCode = true,
-  lintStdin = true,
-  lintFormats = {
-    '%f(%l,%c): %tarning %m',
-    '%f(%l,%c): %trror %m'
-  },
-  formatCommand = 'eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}',
-  formatStdin = true
-}
-
-lsp.efm.setup {
-  on_attach = on_lsp_attach,
-  filetypes = { 'javascript', 'typescript' },
-  init_options = {
-    documentFormatting = true
-  },
-  settings = {
-    rootMarkers = { '.git' },
-    lintDebounce = 500,
-    languages = {
-      typescript = { eslint_d },
-      javascript = { eslint_d }
+  lsp.efm.setup {
+    on_attach = on_lsp_attach,
+    filetypes = { 'javascript', 'typescript' },
+    init_options = {
+      documentFormatting = true
+    },
+    settings = {
+      rootMarkers = { '.git' },
+      lintDebounce = 500,
+      languages = {
+        typescript = { eslint_d },
+        javascript = { eslint_d }
+      }
     }
   }
-}
 
--- LSP handlers
-vim.lsp.handlers['textDocument/formatting'] = function(err, result, ctx)
-  -- Used to format the buffer in an async way.
-  if err ~= nil or result == nil then
-      return
-  end
-  -- if
-  --     vim.api.nvim_buf_get_var(ctx.bufnr, 'init_changedticr') == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick')
-  -- then
-    local view = vim.fn.winsaveview()
-    vim.lsp.util.apply_text_edits(result, ctx.bufnr)
-    vim.fn.winrestview(view)
-    if ctx.bufnr == vim.api.nvim_get_current_buf() then
+  -- LSP handlers
+  vim.lsp.handlers['textDocument/formatting'] = function(err, result, ctx)
+    -- Used to format the buffer in an async way.
+    if err ~= nil or result == nil then
+        return
+    end
+    -- if
+    --     vim.api.nvim_buf_get_var(ctx.bufnr, 'init_changedticr') == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick')
+    -- then
+      local view = vim.fn.winsaveview()
+      vim.lsp.util.apply_text_edits(result, ctx.bufnr)
+      vim.fn.winrestview(view)
+      if ctx.bufnr == vim.api.nvim_get_current_buf() then
         vim.b.saving_format = true
         vim.cmd [[update]]
         vim.b.saving_format = false
-    end
-  -- end
-end
-
+      end
+    -- end
+  end
 EOF
-
 endif
