@@ -443,6 +443,18 @@ lsp.tsserver.setup {
   end
 }
 
+local eslint_d = {
+  lintCommand = 'eslint_d --cache -f visualstudio --stdin --stdin-filename ${INPUT}',
+  lintIgnoreExitCode = true,
+  lintStdin = true,
+  lintFormats = {
+    '%f(%l,%c): %tarning %m',
+    '%f(%l,%c): %trror %m'
+  },
+  formatCommand = 'eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}',
+  formatStdin = true
+}
+
 lsp.efm.setup {
   on_attach = on_lsp_attach,
   filetypes = { 'javascript', 'typescript' },
@@ -450,22 +462,11 @@ lsp.efm.setup {
     documentFormatting = true
   },
   settings = {
-    rootMarkers = { '.gir' },
+    rootMarkers = { '.git' },
     lintDebounce = 500,
     languages = {
-      typescript = {
-        {
-          lintCommand = 'eslint_d --cache -f visualstudio --stdin --stdin-filename ${INPUT}',
-          lintIgnoreExitCode = true,
-          lintStdin = true,
-          lintFormats = {
-            '%f(%l,%c): %tarning %m',
-            '%f(%l,%c): %trror %m'
-          },
-          formatCommand = 'eslint_d --fix-to-stdout --stdin --stdin-filename ${INPUT}',
-          formatStdin = true
-        }
-      }
+      typescript = { eslint_d },
+      javascript = { eslint_d }
     }
   }
 }
