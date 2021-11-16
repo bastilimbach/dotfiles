@@ -115,7 +115,7 @@ set shiftwidth=2
 set expandtab
 set autoindent
 set copyindent
-set listchars=space:·,eol:↴,precedes:«,extends:»,trail:~
+set listchars=space:·,tab:>-,eol:↴,precedes:«,extends:»,trail:~
 set list
 
 " Splits
@@ -435,6 +435,8 @@ lua <<EOF
     end
   }
 
+  lsp.vuels.setup {}
+
   local eslint_d = {
     lintCommand = 'eslint_d --cache -f visualstudio --stdin --stdin-filename ${INPUT}',
     lintIgnoreExitCode = true,
@@ -449,7 +451,7 @@ lua <<EOF
 
   lsp.efm.setup {
     on_attach = on_lsp_attach,
-    filetypes = { 'javascript', 'typescript' },
+    filetypes = { 'javascript', 'typescript', 'vue' },
     init_options = {
       documentFormatting = true
     },
@@ -458,7 +460,8 @@ lua <<EOF
       lintDebounce = 500,
       languages = {
         typescript = { eslint_d },
-        javascript = { eslint_d }
+        javascript = { eslint_d },
+        vue = { eslint_d }
       }
     }
   }
