@@ -15,6 +15,9 @@ map <leader>Y "*Y
 map <leader>p "*p<CR>
 map <leader>P "*P<CR>
 nnoremap Y y$
+" Maintain the cursor position when yanking a visual selection
+vnoremap <expr>y "my\"" . v:register . "y`y"
+vnoremap <expr>Y "my\"" . v:register . "Y`y"
 
 " Save & Quit
 nnoremap <leader>w :w<CR>
