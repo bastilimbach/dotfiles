@@ -119,6 +119,7 @@ set shiftwidth=2
 set expandtab
 set autoindent
 set copyindent
+set foldmethod=indent
 set listchars=space:·,tab:>-,eol:↴,precedes:«,extends:»,trail:~
 set list
 set fillchars+=diff:╱
@@ -373,6 +374,13 @@ lua <<EOF
     }
   }
 
+  -- Set foldmethod to 'expr' and use treesitter if the parser for the current filetype is installed.
+  local parsers = require('nvim-treesitter.parsers')
+  local configs = parsers.get_parser_configs()
+  local ft_str = table.concat(
+    vim.tbl_map(function(ft) return configs[ft].filetype or ft end, parsers.available_parsers()
+  ), ',')
+  vim.cmd('autocmd Filetype ' .. ft_str .. ' setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()')
   -- LSP
   -- Completion
   local cmp = require('cmp')
