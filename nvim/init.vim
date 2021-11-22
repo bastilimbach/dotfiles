@@ -84,6 +84,7 @@ nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap gi <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader>x <cmd>lua vim.diagnostic.show_line_diagnostics({ show_header = false })<CR>
 
 " --------------
 " General settings
