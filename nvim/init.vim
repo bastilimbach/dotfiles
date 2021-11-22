@@ -118,6 +118,7 @@ set autoindent
 set copyindent
 set listchars=space:·,tab:>-,eol:↴,precedes:«,extends:»,trail:~
 set list
+set fillchars+=diff:╱
 
 " Splits
 set splitbelow
@@ -239,6 +240,9 @@ highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=und
 highlight Sneak guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
 highlight SneakLabel guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
 highlight SneakLabelMask guifg=NONE ctermfg=NONE cterm=nocombine
+highlight DiffAdd guibg='#164846'
+highlight DiffDelete guibg='#823c41'
+highlight DiffChange guibg='#394b70'
 
 " --------------
 " Plugin config
