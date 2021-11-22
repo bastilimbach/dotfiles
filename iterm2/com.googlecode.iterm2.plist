@@ -12,6 +12,8 @@
 	<true/>
 	<key>Default Bookmark Guid</key>
 	<string>FF5D7322-CEAB-4BCE-BCAC-C62F78DE49A9</string>
+	<key>Default Toolbelt Width</key>
+	<real>250</real>
 	<key>DimBackgroundWindows</key>
 	<false/>
 	<key>DimInactiveSplitPanes</key>
@@ -114,7 +116,7 @@
 	<key>HideMenuBarInFullscreen</key>
 	<true/>
 	<key>HideScrollbar</key>
-	<false/>
+	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
 	<key>IRMemory</key>
@@ -1470,6 +1472,8 @@
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
+	<true/>
+	<key>ShowMetalFPSmeter</key>
 	<false/>
 	<key>SmartPlacement</key>
 	<false/>
@@ -1491,6 +1495,12 @@
 	<integer>0</integer>
 	<key>TerminalVMargin</key>
 	<integer>0</integer>
+	<key>ToolbeltTools</key>
+	<array>
+		<string>Profiles</string>
+	</array>
+	<key>UseAdaptiveFrameRate</key>
+	<true/>
 	<key>UseBorder</key>
 	<false/>
 	<key>VisualIndicatorForEsc</key>
