@@ -381,6 +381,12 @@ lua <<EOF
     vim.tbl_map(function(ft) return configs[ft].filetype or ft end, parsers.available_parsers()
   ), ',')
   vim.cmd('autocmd Filetype ' .. ft_str .. ' setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()')
+
+  -- DiffView
+  require('diffview').setup {
+    enhanced_diff_hl = true
+  }
+
   -- LSP
   -- Completion
   local cmp = require('cmp')
