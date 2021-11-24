@@ -121,6 +121,7 @@ set expandtab
 set autoindent
 set copyindent
 set foldmethod=indent
+set foldlevel=99
 set listchars=space:·,tab:>-,eol:↴,precedes:«,extends:»,trail:~
 set list
 set fillchars+=diff:╱
