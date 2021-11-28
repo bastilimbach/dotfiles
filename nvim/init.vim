@@ -138,6 +138,11 @@ augroup TrimTrailingWhiteSpace
   au BufWritePre * %s/\n\+\%$//e
 augroup END
 
+augroup HighlightYank
+  au!
+  au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
+augroup END
+
 " --------------
 " Utility functions
 " --------------
@@ -182,7 +187,6 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'tpope/vim-repeat' " Makes plugin actions repeatable using dot.
   Plug 'tpope/vim-commentary' " Commenting.
   Plug 'unblevable/quick-scope' " Highlight unique character in every word to help with f, F.
-  Plug 'machakann/vim-highlightedyank' " Highlight yanked lines.
   Plug 'JoosepAlviste/nvim-ts-context-commentstring' " Makes it possible to use vim-commentary with files which include different types. E.g: javascript in html
   Plug 'justinmk/vim-sneak' " Jump vertically using two characters.
 
