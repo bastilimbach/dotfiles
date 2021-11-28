@@ -217,7 +217,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'rmagatti/auto-session' " Automatically creates sessions on exit & restores them as soon as vim is started.
 
     " Themes
-    Plug 'Pocco81/Catppuccino.nvim'
+    Plug 'catppuccin/nvim'
   endif
 call plug#end()
 
@@ -227,18 +227,18 @@ call plug#end()
 if !exists('g:vscode')
 lua <<EOF
   -- Require theme and set configuration
-  require('catppuccino').setup {
+  require('catppuccin').setup {
     colorscheme = 'neon_latte',
     term_colors = true,
     integrations = {
-      telescope = true
+      telescope = true,
+      nvimtree = {
+        enabled = true
+      }
     },
-    nvimtree = {
-      enabled = true
-    }
   }
 EOF
-  colorscheme catppuccino
+  colorscheme catppuccin
 endif
 
 set background=dark
