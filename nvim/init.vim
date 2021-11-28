@@ -5,8 +5,7 @@ nnoremap <SPACE> <Nop>
 let mapleader = " "
 inoremap jk <ESC>
 inoremap kj <ESC>
-tnoremap jk <C-\><C-n>
-tnoremap kj <C-\><C-n>
+tnoremap <ESC> <C-\><C-n>
 
 " Copy & Paste
 map <leader>y "*y
