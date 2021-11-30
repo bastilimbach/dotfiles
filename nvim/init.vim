@@ -188,11 +188,11 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'tpope/vim-repeat' " Makes plugin actions repeatable using dot.
   Plug 'tpope/vim-commentary' " Commenting.
   Plug 'unblevable/quick-scope' " Highlight unique character in every word to help with f, F.
-  Plug 'JoosepAlviste/nvim-ts-context-commentstring' " Makes it possible to use vim-commentary with files which include different types. E.g: javascript in html
   Plug 'justinmk/vim-sneak' " Jump vertically using two characters.
 
   " Disable certain plugins for VSCode
   if !exists('g:vscode')
+    Plug 'JoosepAlviste/nvim-ts-context-commentstring' " Makes it possible to use vim-commentary with files which include different types. E.g: javascript in html
     Plug 'nvim-lua/plenary.nvim' " Dependency for a lot of lua plugins. Packages many lua utility functions.
     Plug 'nvim-telescope/telescope.nvim' " Fuzzy file finder.
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " Makes fuzzy finding in telescope faster.
