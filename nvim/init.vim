@@ -200,7 +200,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'neovim/nvim-lspconfig' " Used to configure neovim lsp for different lsp servers.
     Plug 'nvim-lualine/lualine.nvim' " Statusbar
     Plug 'junegunn/vim-peekaboo' " Displays a right buffer to view register content & select the desired register before pasting.
-    Plug 'jiangmiao/auto-pairs' " Automatically inserts matching brackets & quotes.
+    Plug 'windwp/nvim-autopairs' " Automatically inserts matching brackets & quotes.
     Plug 'kyazdani42/nvim-tree.lua' " Sidebar which displays the current working-tree (files).
     Plug 'kyazdani42/nvim-web-devicons' " Icons for nvim-tree.
     Plug 'hrsh7th/nvim-cmp' " Autocompletion plugin.
@@ -264,6 +264,10 @@ let g:floaterm_title = '($1|$2)'
 
 if !exists('g:vscode')
 lua <<EOF
+  require('nvim-autopairs').setup {
+    check_ts = true
+  }
+
   -- Nvim Tree
   require('nvim-tree').setup {
     diagnostics = {
