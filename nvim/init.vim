@@ -186,13 +186,11 @@ call plug#begin(stdpath('data') . '/plugged')
   " Plugins
   Plug 'tpope/vim-surround' " Provides mappings to easily change surroundings in pairs.
   Plug 'tpope/vim-repeat' " Makes plugin actions repeatable using dot.
-  Plug 'tpope/vim-commentary' " Commenting.
   Plug 'unblevable/quick-scope' " Highlight unique character in every word to help with f, F.
   Plug 'justinmk/vim-sneak' " Jump vertically using two characters.
 
   " Disable certain plugins for VSCode
   if !exists('g:vscode')
-    Plug 'JoosepAlviste/nvim-ts-context-commentstring' " Makes it possible to use vim-commentary with files which include different types. E.g: javascript in html
     Plug 'nvim-lua/plenary.nvim' " Dependency for a lot of lua plugins. Packages many lua utility functions.
     Plug 'nvim-telescope/telescope.nvim' " Fuzzy file finder.
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " Makes fuzzy finding in telescope faster.
@@ -215,6 +213,7 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'voldikss/vim-floaterm' " Use the terminal in a floating/popup window.
     Plug 'sindrets/diffview.nvim' " Single tabpage interface for easily cycling through git diffs.
     Plug 'rmagatti/auto-session' " Automatically creates sessions on exit & restores them as soon as vim is started.
+    Plug 'numToStr/Comment.nvim' " Smart and Powerful commenting plugin for neovim
 
     " Themes
     Plug 'catppuccin/nvim'
@@ -264,6 +263,10 @@ let g:floaterm_title = '($1|$2)'
 
 if !exists('g:vscode')
 lua <<EOF
+  -- Comment
+  require('Comment').setup {}
+
+  -- Autopairs
   require('nvim-autopairs').setup {
     check_ts = true
   }
