@@ -283,6 +283,11 @@ lua <<EOF
     }
   }
 
+  -- Trouble
+  require('trouble').setup {
+    mode = 'document_diagnostics'
+  }
+
   -- Lualine
   require('lualine').setup {
     options = {
