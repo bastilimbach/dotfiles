@@ -227,13 +227,12 @@ if !exists('g:vscode')
 lua <<EOF
   -- Require theme and set configuration
   require('catppuccin').setup {
-    colorscheme = 'neon_latte',
-    term_colors = true,
     integrations = {
       telescope = true,
       nvimtree = {
         enabled = true
-      }
+      },
+      cmp = true
     },
   }
 EOF
@@ -302,7 +301,7 @@ lua <<EOF
         },
         {
           'diagnostics',
-          sources = { 'nvim_lsp' },
+          sources = { 'nvim_diagnostic' },
           cond = function() return vim.fn.winwidth(0) > 50 end
         },
       },
