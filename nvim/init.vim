@@ -379,7 +379,8 @@ lua <<EOF
       'vue',
       'yaml',
       'css',
-      'bash'
+      'bash',
+      'lua'
     },
     highlight = {
       enable = true,
