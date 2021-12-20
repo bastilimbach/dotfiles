@@ -99,6 +99,7 @@ set relativenumber
 set undolevels=1000
 set noshowmode
 set completeopt=menu,menuone,noselect
+set mouse=a
 
 " Backup
 set noswapfile
