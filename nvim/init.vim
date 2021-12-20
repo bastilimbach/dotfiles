@@ -510,12 +510,13 @@ lua <<EOF
   -- LSP handlers
   vim.lsp.handlers['textDocument/formatting'] = function(err, result, ctx)
     -- Used to format the buffer in an async way.
+    -- https://github.com/lukas-reineke/dotfiles/blob/e84ddf819b7b279dd77b558a65421feca5543180/vim/lua/lsp/handlers.lua
     if err ~= nil or result == nil then
-        return
+      return
     end
-    -- if
-    --     vim.api.nvim_buf_get_var(ctx.bufnr, 'init_changedticr') == vim.api.nvim_buf_get_var(ctx.bufnr, 'changedtick')
-    -- then
+    if
+      vim.api.nvim_buf_get_var(ctx.bufnr, "init_changedtick") == vim.api.nvim_buf_get_var(ctx.bufnr, "changedtick")
+      then
       local view = vim.fn.winsaveview()
       vim.lsp.util.apply_text_edits(result, ctx.bufnr)
       vim.fn.winrestview(view)
@@ -524,7 +525,7 @@ lua <<EOF
         vim.cmd [[update]]
         vim.b.saving_format = false
       end
-    -- end
+    end
   end
 EOF
 endif
