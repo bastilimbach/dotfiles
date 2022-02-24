@@ -475,7 +475,15 @@ lua <<EOF
     end
   }
 
-  lsp.vuels.setup {}
+  -- lsp.vuels.setup {}
+  lsp.volar.setup {
+    init_options = {
+      typescript = {
+        serverPath = '/usr/local/lib/node_modules/typescript/lib/tsserverlibrary.js'
+      }
+    }
+  }
+  lsp.rust_analyzer.setup {}
 
   local eslint_d = {
     lintCommand = 'eslint_d --cache -f visualstudio --stdin --stdin-filename ${INPUT}',
@@ -491,7 +499,7 @@ lua <<EOF
 
   lsp.efm.setup {
     on_attach = on_lsp_attach,
-    filetypes = { 'javascript', 'typescript', 'vue' },
+    filetypes = { 'javascript', 'typescript' },
     init_options = {
       documentFormatting = true
     },
