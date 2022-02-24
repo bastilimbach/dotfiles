@@ -185,6 +185,7 @@ call plug#begin(stdpath('data') . '/plugged')
   " Plugins
   Plug 'tpope/vim-surround' " Provides mappings to easily change surroundings in pairs.
   Plug 'tpope/vim-repeat' " Makes plugin actions repeatable using dot.
+  Plug 'tpope/vim-sleuth' " Automatically adjusts 'shiftwidth' and 'expandtab' heuristically based on the current file.
   Plug 'unblevable/quick-scope' " Highlight unique character in every word to help with f, F.
   Plug 'justinmk/vim-sneak' " Jump vertically using two characters.
 
