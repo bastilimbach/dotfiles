@@ -113,13 +113,11 @@ set incsearch
 set smartcase
 
 " Indentation
-set smartindent
 set tabstop=2
-set softtabstop=2
+set softtabstop=0
 set shiftwidth=2
 set expandtab
 set autoindent
-set copyindent
 set foldmethod=indent
 set foldlevel=99
 set foldlevelstart=99
