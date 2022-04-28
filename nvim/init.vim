@@ -484,6 +484,8 @@ lua <<EOF
     }
   }
   lsp.rust_analyzer.setup {}
+  lsp.angularls.setup {}
+  lsp.emmet_ls.setup {}
 
   local eslint_d = {
     lintCommand = 'eslint_d --cache -f visualstudio --stdin --stdin-filename ${INPUT}',
