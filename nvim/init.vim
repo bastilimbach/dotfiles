@@ -467,6 +467,11 @@ lua <<EOF
 
   local lsp = require('lspconfig')
   lsp.tsserver.setup {
+    init_options = {
+      preferences = {
+        disableSuggestions = true
+      }
+    },
     capabilities = capabilities,
     on_attach = function (client)
       -- Disable document formatting for tsserver as efm will do this
