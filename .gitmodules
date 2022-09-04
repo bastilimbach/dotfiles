@@ -4,5 +4,5 @@
 	ignore = dirty
 [submodule ".zinit"]
 	path = .zinit
-	url = https://github.com/zdharma/zinit.git
+	url = https://github.com/zdharma-continuum/zinit.git
 	ignore = dirty
