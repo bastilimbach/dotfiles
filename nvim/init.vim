@@ -383,7 +383,8 @@ lua <<EOF
       'yaml',
       'css',
       'bash',
-      'lua'
+      'lua',
+      'prisma'
     },
     highlight = {
       enable = true,
@@ -495,6 +496,7 @@ lua <<EOF
   lsp.rust_analyzer.setup {}
   lsp.angularls.setup {}
   lsp.emmet_ls.setup {}
+  lsp.prismals.setup {}
 
   local eslint_d = {
     lintCommand = 'eslint_d --cache -f visualstudio --stdin --stdin-filename ${INPUT}',
