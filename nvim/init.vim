@@ -236,6 +236,7 @@ lua <<EOF
     },
   }
 EOF
+  let g:catppuccin_flavour = "macchiato" " latte, frappe, macchiato, mocha
   colorscheme catppuccin
 endif
 
@@ -279,7 +280,10 @@ lua <<EOF
       enable = true,
     },
     view = {
-      auto_resize = true
+      adaptive_size = true
+    },
+    git = {
+      ignore = false
     }
   }
 
