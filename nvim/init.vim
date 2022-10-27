@@ -4,7 +4,6 @@
 nnoremap <SPACE> <Nop>
 let mapleader = " "
 inoremap jk <ESC>
-inoremap kj <ESC>
 tnoremap <ESC> <C-\><C-n>
 
 " Copy & Paste
@@ -17,6 +16,7 @@ nnoremap Y y$
 " Maintain the cursor position when yanking a visual selection
 vnoremap <expr>y "my\"" . v:register . "y`y"
 vnoremap <expr>Y "my\"" . v:register . "Y`y"
+vnoremap p "_dP
 
 " Save & Quit
 nnoremap <leader>w :w<CR>
@@ -184,6 +184,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 call plug#begin(stdpath('data') . '/plugged')
   " Plugins
   Plug 'tpope/vim-surround' " Provides mappings to easily change surroundings in pairs.
+  Plug 'wellle/targets.vim' " Adds various text objects to give you more targets to operate on.
   Plug 'tpope/vim-repeat' " Makes plugin actions repeatable using dot.
   Plug 'tpope/vim-sleuth' " Automatically adjusts 'shiftwidth' and 'expandtab' heuristically based on the current file.
   Plug 'unblevable/quick-scope' " Highlight unique character in every word to help with f, F.
@@ -422,7 +423,7 @@ lua <<EOF
     sources = {
       { name = 'nvim_lsp' },
       { name = 'vsnip' },
-      { name = 'buffer', keyword_length = 5 }
+      { name = 'buffer' }
     },
     mapping = {
       ['<Tab>'] = cmp.mapping.select_next_item(),
@@ -447,13 +448,12 @@ lua <<EOF
       }),
     }
   }
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
   -- LSP config
   local on_lsp_attach = function (client)
     -- If the lsp server support formatting format the buffer on save.
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.document_formatting then
       vim.cmd [[augroup Format]]
       vim.cmd [[autocmd! * <buffer>]]
       vim.cmd [[autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()]]
@@ -480,7 +480,7 @@ lua <<EOF
     capabilities = capabilities,
     on_attach = function (client)
       -- Disable document formatting for tsserver as efm will do this
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.document_formatting = false
       on_lsp_attach(client)
     end
   }
@@ -489,14 +489,22 @@ lua <<EOF
   lsp.volar.setup {
     init_options = {
       typescript = {
-        serverPath = '/usr/local/lib/node_modules/typescript/lib/tsserverlibrary.js'
+        tsdk = '/usr/local/lib/node_modules/typescript/lib'
       }
     }
   }
-  lsp.rust_analyzer.setup {}
-  lsp.angularls.setup {}
-  lsp.emmet_ls.setup {}
-  lsp.prismals.setup {}
+  lsp.rust_analyzer.setup {
+    on_attach = on_lsp_attach,
+  }
+  lsp.angularls.setup {
+    on_attach = on_lsp_attach,
+  }
+  lsp.emmet_ls.setup {
+    on_attach = on_lsp_attach,
+  }
+  lsp.prismals.setup {
+    on_attach = on_lsp_attach,
+  }
 
   local eslint_d = {
     lintCommand = 'eslint_d --cache -f visualstudio --stdin --stdin-filename ${INPUT}',
