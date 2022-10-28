@@ -272,6 +272,11 @@ lua <<EOF
     check_ts = true
   }
 
+  -- Auto session
+  require('auto-session').setup {
+    pre_save_cmds = {'tabdo NvimTreeClose'}
+  }
+
   -- Nvim Tree
   require('nvim-tree').setup {
     diagnostics = {
