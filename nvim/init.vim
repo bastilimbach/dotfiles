@@ -497,6 +497,8 @@ lua <<EOF
 
   -- lsp.vuels.setup {}
   lsp.volar.setup {
+    capabilities = capabilities,
+    on_attach = on_lsp_attach,
     init_options = {
       typescript = {
         tsdk = '/usr/local/lib/node_modules/typescript/lib'
@@ -504,15 +506,19 @@ lua <<EOF
     }
   }
   lsp.rust_analyzer.setup {
+    capabilities = capabilities,
     on_attach = on_lsp_attach,
   }
   lsp.angularls.setup {
+    capabilities = capabilities,
     on_attach = on_lsp_attach,
   }
   lsp.emmet_ls.setup {
+    capabilities = capabilities,
     on_attach = on_lsp_attach,
   }
   lsp.prismals.setup {
+    capabilities = capabilities,
     on_attach = on_lsp_attach,
   }
 
@@ -529,6 +535,7 @@ lua <<EOF
   }
 
   lsp.efm.setup {
+    capabilities = capabilities,
     on_attach = on_lsp_attach,
     filetypes = { 'javascript', 'typescript' },
     init_options = {
