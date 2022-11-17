@@ -5,6 +5,8 @@ nnoremap <SPACE> <Nop>
 let mapleader = " "
 inoremap jk <ESC>
 tnoremap <ESC> <C-\><C-n>
+nnoremap <leader>ve <cmd>tabedit $MYVIMRC<CR>
+nnoremap <leader>vr <cmd>source $MYVIMRC<CR>
 
 " Copy & Paste
 map <leader>y "*y
