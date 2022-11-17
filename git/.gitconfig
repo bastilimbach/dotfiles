@@ -12,6 +12,9 @@
         status = auto
         branch = auto
         ui = true
+[log]
+        abbrevCommit = true
+        follow = true
 [core]
         excludesFile = ~/.gitignore
         editor = nvim
@@ -21,11 +24,15 @@
         whitespace = nowarn
 [mergetool]
         keepBackup = false
+        keepTemporaries = false
 [mergetool "p4merge"]
         path = /Applications/p4merge.app/Contents/MacOS/p4merge
 [mergetool "smerge"]
         cmd = smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
         trustExitCode = true
+[diff]
+        mnemonicPrefix = true
+        renames = true
 [difftool]
         prompt = false
 [help]
@@ -34,7 +41,7 @@
         default = current
         followTags = true
 [pull]
-        rebase = true
+        rebase = merges
 [fetch]
         prune = true
 [commit]
@@ -48,10 +55,14 @@
 [rebase]
         autoStash = true
 [status]
+        submoduleSummary = true
         showUntrackedFiles = all
 [transfer]
         fsckobjects = true
 [rerere]
         enabled = true
+        autoUpdate = true
 [init]
         defaultBranch = main
+[advice]
+        detachedHead = false
