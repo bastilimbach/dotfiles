@@ -102,6 +102,9 @@ set undolevels=1000
 set noshowmode
 set completeopt=menu,menuone,noselect
 set mouse=a
+set spell
+set spelllang=en,de
+set spellsuggest=best,9
 
 " Backup
 set noswapfile
