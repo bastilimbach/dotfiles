@@ -2,6 +2,7 @@
 [user]
         name = Sebastian Limbach
         email = hello@sebastianlimbach.com
+        signingkey = ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDWElRSvP9/S4FcNVzn7iJyHuz3egxRVyzzfL85q7MCYFmutukrGJIe7eVOkixBFksi0RxkX9p8vF4Uv/Z4heoN6GyZTCLB+ugR1+66HG5k/O4cScwQdtsF+WomVs1VrT8C8WOoj9JWZZpuEeJ8K+GqHUOnvD71QlTFLuhJovdATTrn+2ITJbiV3sl73Y/nV7EmqYk49LeXrWxIntTeRnuVy3GWsBRfq20bqUsK5ou6+MyqAjGPLWKj+hPFX/XpPaYwHO3r3ut73LLcKtSXL3RYQ3PD3VAPmbqr9+tbYWH31562RYAiSlci96fetDxXur1ZuSzN7VpebFYR9dQQFe0v
 [filter "lfs"]
         required = true
         clean = git-lfs clean -- %f
@@ -66,3 +67,9 @@
         defaultBranch = main
 [advice]
         detachedHead = false
+[http]
+        postBuffer = 157286400
+[gpg]
+        format = ssh
+[gpg "ssh"]
+        program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
