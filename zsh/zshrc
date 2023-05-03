@@ -32,6 +32,9 @@ autoload -Uz compinit && compinit
 # Source config
 source $DOTFILES/zsh/config.zsh
 
+# Source key-bindings & completions
+source $DOTFILES/zsh/completions.zsh
+
 # Source aliases
 for file in $DOTFILES/**/aliases.zsh; do
   source "$file"
