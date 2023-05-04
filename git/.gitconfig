@@ -26,16 +26,24 @@
 [mergetool]
         keepBackup = false
         keepTemporaries = false
+        prompt = false
 [mergetool "p4merge"]
         path = /Applications/p4merge.app/Contents/MacOS/p4merge
 [mergetool "smerge"]
         cmd = smerge mergetool "$BASE" "$LOCAL" "$REMOTE" -o "$MERGED"
         trustExitCode = true
+[difftool "Kaleidoscope"]
+        cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+        cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+        trustExitCode = true
 [diff]
         mnemonicPrefix = true
         renames = true
+        tool = Kaleidoscope
 [difftool]
         prompt = false
+        trustExitCode = true
 [help]
         autoCorrect = 1
 [push]
@@ -52,7 +60,7 @@
 [merge]
         ff = false
         conflictStyle = diff3
-        tool = smerge
+        tool = Kaleidoscope
 [rebase]
         autoStash = true
 [status]
