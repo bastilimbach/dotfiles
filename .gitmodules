@@ -6,3 +6,7 @@
 	path = .zinit
 	url = https://github.com/zdharma-continuum/zinit.git
 	ignore = dirty
+[submodule "tmux/tpm"]
+	path = tmux/tpm
+	url = https://github.com/tmux-plugins/tpm
+	ignore = dirty
