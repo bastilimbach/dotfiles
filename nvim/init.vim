@@ -25,8 +25,8 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :qa<CR>
 if exists('g:vscode')
-  nnoremap <leader>w <Cmd>call VSCodeNotify('workbench.action.files.save')<CR>
-  nnoremap <leader>q <Cmd>call VSCodeNotify('workbench.action.closeWindow')<CR>
+  nnoremap <leader>w <Cmd>lua require('vscode').action('workbench.action.files.save')<CR>
+  nnoremap <leader>q <Cmd>lua require('vscode').action('workbench.action.closeWindow')<CR>
 endif
 
 " Navigate between windows
@@ -35,10 +35,10 @@ nnoremap <silent> <C-j> :call WinMove('j')<cr>
 nnoremap <silent> <C-k> :call WinMove('k')<cr>
 nnoremap <silent> <C-l> :call WinMove('l')<cr>
 if exists('g:vscode')
-  nnoremap <C-h> <Cmd>call VSCodeNotify('workbench.action.focusLeftGroup')<CR>
-  nnoremap <C-j> <Cmd>call VSCodeNotify('workbench.action.focusBelowGroup')<CR>
-  nnoremap <C-k> <Cmd>call VSCodeNotify('workbench.action.focusAboveGroup')<CR>
-  nnoremap <C-l> <Cmd>call VSCodeNotify('workbench.action.focusRightGroup')<CR>
+  nnoremap <C-h> <Cmd>lua require('vscode').action('workbench.action.focusLeftGroup')<CR>
+  nnoremap <C-j> <Cmd>lua require('vscode').action('workbench.action.focusBelowGroup')<CR>
+  nnoremap <C-k> <Cmd>lua require('vscode').action('workbench.action.focusAboveGroup')<CR>
+  nnoremap <C-l> <Cmd>lua require('vscode').action('workbench.action.focusRightGroup')<CR>
 endif
 
 " Line ending/start on home row
@@ -65,23 +65,27 @@ vnoremap <TAB> >
 vnoremap <S-TAB> <
 
 " Plugin keymaps
-nnoremap <leader>v <cmd>NvimTreeToggle<CR>
-nnoremap <leader>xx <cmd>TroubleToggle<CR>
+if !exists('g:vscode')
+  nnoremap <leader>v <cmd>NvimTreeToggle<CR>
+  nnoremap <leader>xx <cmd>TroubleToggle<CR>
 
-" Telescope keymaps
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fa <cmd>Telescope find_files no_ignore=true<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>fs <cmd>Telescope lsp_document_symbols<cr>
-nnoremap <leader>fd <cmd>Telescope lsp_document_diagnostics<cr>
+  " Telescope keymaps
+  nnoremap <leader>ff <cmd>Telescope find_files<cr>
+  nnoremap <leader>fa <cmd>Telescope find_files no_ignore=true<cr>
+  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+  nnoremap <leader>fb <cmd>Telescope buffers<cr>
+  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+  nnoremap <leader>fs <cmd>Telescope lsp_document_symbols<cr>
+  nnoremap <leader>fd <cmd>Telescope lsp_document_diagnostics<cr>
 
-" Floaterm keymaps
-nnoremap <silent> <leader>t :FloatermToggle<CR>
-nnoremap <silent> <leader>n :FloatermPrev<CR>
-nnoremap <silent> <leader>m :FloatermNext<CR>
-nnoremap <silent> <leader>k :FloatermKill<CR>
+  " Floaterm keymaps
+  nnoremap <silent> <leader>t :FloatermToggle<CR>
+  nnoremap <silent> <leader>n :FloatermPrev<CR>
+  nnoremap <silent> <leader>m :FloatermNext<CR>
+  nnoremap <silent> <leader>k :FloatermKill<CR>
+
+  nnoremap <leader>x <cmd>lua vim.diagnostic.open_float()<CR>
+endif
 
 " LSP keymaps
 nnoremap gh <cmd>lua vim.lsp.buf.hover()<CR>
@@ -89,7 +93,6 @@ nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap gi <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <leader>x <cmd>lua vim.diagnostic.open_float()<CR>
 
 " --------------
 " General settings
@@ -102,9 +105,12 @@ set undolevels=1000
 set noshowmode
 set completeopt=menu,menuone,noselect
 set mouse=a
-set spell
-set spelllang=en,de
-set spellsuggest=best,9
+
+if !exists('g:vscode')
+  set spell
+  set spelllang=en,de
+  set spellsuggest=best,9
+endif
 
 " Backup
 set noswapfile
@@ -137,16 +143,18 @@ set splitright
 " --------------
 " Autocommands
 " --------------
-augroup TrimTrailingWhiteSpace
-  au!
-  au BufWritePre * %s/\s\+$//e
-  au BufWritePre * %s/\n\+\%$//e
-augroup END
+if !exists('g:vscode')
+  augroup TrimTrailingWhiteSpace
+    au!
+    au BufWritePre * %s/\s\+$//e
+    au BufWritePre * %s/\n\+\%$//e
+  augroup END
 
-augroup HighlightYank
-  au!
-  au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
-augroup END
+  augroup HighlightYank
+    au!
+    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}
+  augroup END
+endif
 
 " --------------
 " Utility functions
@@ -194,6 +202,7 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'tpope/vim-sleuth' " Automatically adjusts 'shiftwidth' and 'expandtab' heuristically based on the current file.
   Plug 'unblevable/quick-scope' " Highlight unique character in every word to help with f, F.
   Plug 'justinmk/vim-sneak' " Jump vertically using two characters.
+  Plug 'm4xshen/hardtime.nvim' "Break bad habits, master Vim motions.
 
   " Disable certain plugins for VSCode
   if !exists('g:vscode')
@@ -267,6 +276,12 @@ let g:sneak#label = 1
 let g:sneak#prompt = '👞'
 let g:floaterm_title = '($1|$2)'
 
+lua <<EOF
+require('hardtime').setup {
+  disable_mouse = false
+}
+EOF
+
 if !exists('g:vscode')
 lua <<EOF
   -- Comment
@@ -287,15 +302,12 @@ lua <<EOF
     diagnostics = {
       enable = true
     },
-    update_focused_file = {
-      enable = true,
-    },
     view = {
       adaptive_size = true
     },
     git = {
       ignore = false
-    }
+    },
   }
 
   -- Trouble
@@ -481,7 +493,7 @@ lua <<EOF
   end
 
   local lsp = require('lspconfig')
-  lsp.tsserver.setup {
+  lsp.ts_ls.setup {
     init_options = {
       preferences = {
         disableSuggestions = true
@@ -513,10 +525,10 @@ lua <<EOF
     capabilities = capabilities,
     on_attach = on_lsp_attach,
   }
-  lsp.emmet_ls.setup {
-    capabilities = capabilities,
-    on_attach = on_lsp_attach,
-  }
+  -- lsp.emmet_ls.setup {
+  --   capabilities = capabilities,
+  --   on_attach = on_lsp_attach,
+  -- }
   lsp.prismals.setup {
     capabilities = capabilities,
     on_attach = on_lsp_attach,
