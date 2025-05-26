@@ -44,3 +44,4 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+export HOMEBREW_NO_AUTO_UPDATE=1
