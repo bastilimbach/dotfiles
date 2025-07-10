@@ -65,7 +65,7 @@ vnoremap <TAB> >
 vnoremap <S-TAB> <
 
 " Plugin keymaps
-if !exists('g:vscode')
+if !exists('g:vscode') && !has('ide')
   nnoremap <leader>v <cmd>NvimTreeToggle<CR>
   nnoremap <leader>xx <cmd>TroubleToggle<CR>
 
@@ -88,11 +88,19 @@ if !exists('g:vscode')
 endif
 
 " LSP keymaps
-nnoremap gh <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap gr <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap gi <cmd>lua vim.lsp.buf.implementation()<CR>
+if !has('ide')
+  nnoremap gh <cmd>lua vim.lsp.buf.hover()<CR>
+  nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
+  nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
+  nnoremap gr <cmd>lua vim.lsp.buf.references()<CR>
+  nnoremap gi <cmd>lua vim.lsp.buf.implementation()<CR>
+else
+  map gh <Action>(QuickJavaDoc)
+  map gd <Action>(GotoDeclaration)
+  map gD <Action>(GotoTypeDeclaration)
+  map gr <Action>(FindUsages)
+  map gi <Action>(GotoImplementation)
+endif
 
 " --------------
 " General settings
@@ -106,7 +114,7 @@ set noshowmode
 set completeopt=menu,menuone,noselect
 set mouse=a
 
-if !exists('g:vscode')
+if !exists('g:vscode') && !has('ide')
   set spell
   set spelllang=en,de
   set spellsuggest=best,9
@@ -143,7 +151,7 @@ set splitright
 " --------------
 " Autocommands
 " --------------
-if !exists('g:vscode')
+if !exists('g:vscode') && !has('ide')
   augroup TrimTrailingWhiteSpace
     au!
     au BufWritePre * %s/\s\+$//e
@@ -202,10 +210,14 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'tpope/vim-sleuth' " Automatically adjusts 'shiftwidth' and 'expandtab' heuristically based on the current file.
   Plug 'unblevable/quick-scope' " Highlight unique character in every word to help with f, F.
   Plug 'justinmk/vim-sneak' " Jump vertically using two characters.
-  Plug 'm4xshen/hardtime.nvim' "Break bad habits, master Vim motions.
 
-  " Disable certain plugins for VSCode
-  if !exists('g:vscode')
+  " Disable certain plugins IdeaVIM
+  if !has('ide')
+    Plug 'm4xshen/hardtime.nvim' "Break bad habits, master Vim motions.
+  endif
+
+  " Disable certain plugins for VSCode and IdeaVIM
+  if !exists('g:vscode') && !has('ide')
     Plug 'nvim-lua/plenary.nvim' " Dependency for a lot of lua plugins. Packages many lua utility functions.
     Plug 'nvim-telescope/telescope.nvim' " Fuzzy file finder.
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " Makes fuzzy finding in telescope faster.
@@ -238,7 +250,7 @@ call plug#end()
 " --------------
 " Colorscheme & Highlights
 " --------------
-if !exists('g:vscode')
+if !exists('g:vscode') && !has('ide')
 lua <<EOF
   -- Require theme and set configuration
   require('catppuccin').setup {
@@ -273,7 +285,7 @@ highlight DiffChange guibg='#394b70'
 " --------------
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:sneak#label = 1
-let g:sneak#prompt = '👞'
+" let g:sneak#prompt = '👞'
 let g:floaterm_title = '($1|$2)'
 
 lua <<EOF
@@ -282,7 +294,7 @@ require('hardtime').setup {
 }
 EOF
 
-if !exists('g:vscode')
+if !exists('g:vscode') && !has('ide')
 lua <<EOF
   -- Comment
   require('Comment').setup {}
