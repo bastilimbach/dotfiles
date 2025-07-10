@@ -129,41 +129,52 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin(stdpath('data') . '/plugged')
-  " Plugins for all environments
-  Plug 'tpope/vim-surround'           " Provides mappings to easily change surroundings in pairs.
-  Plug 'wellle/targets.vim'           " Adds various text objects to give you more targets to operate on.
-  Plug 'tpope/vim-repeat'             " Makes plugin actions repeatable using dot.
-  Plug 'tpope/vim-sleuth'             " Automatically adjusts 'shiftwidth' and 'expandtab' heuristically based on the current file.
-  Plug 'unblevable/quick-scope'       " Highlight unique character in every word to help with f, F.
-  Plug 'justinmk/vim-sneak'           " Jump vertically using two characters.
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | q
+\| endif
 
-  " Environment-specific plugins
+call plug#begin(stdpath('data') . '/plugged')
+  " Plugins
+  Plug 'tpope/vim-surround' " Provides mappings to easily change surroundings in pairs.
+  Plug 'wellle/targets.vim' " Adds various text objects to give you more targets to operate on.
+  Plug 'tpope/vim-repeat' " Makes plugin actions repeatable using dot.
+  Plug 'tpope/vim-sleuth' " Automatically adjusts 'shiftwidth' and 'expandtab' heuristically based on the current file.
+  Plug 'unblevable/quick-scope' " Highlight unique character in every word to help with f, F.
+  Plug 'justinmk/vim-sneak' " Jump vertically using two characters.
+
+  " Disable certain plugins IdeaVIM
+  if !has('ide')
+    Plug 'm4xshen/hardtime.nvim' "Break bad habits, master Vim motions.
+  endif
+
+  " Disable certain plugins for VSCode and IdeaVIM
   if !exists('g:vscode') && !has('ide')
-    Plug 'm4xshen/hardtime.nvim'                " Break bad habits, master Vim motions.
-    Plug 'nvim-lua/plenary.nvim'                " Dependency for a lot of lua plugins. Packages many lua utility functions.
-    Plug 'nvim-telescope/telescope.nvim'        " Fuzzy file finder.
+    Plug 'nvim-lua/plenary.nvim' " Dependency for a lot of lua plugins. Packages many lua utility functions.
+    Plug 'nvim-telescope/telescope.nvim' " Fuzzy file finder.
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' } " Makes fuzzy finding in telescope faster.
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Syntax highlighting and other stuff.
-    Plug 'neovim/nvim-lspconfig'                " Used to configure neovim lsp for different lsp servers.
-    Plug 'nvim-lualine/lualine.nvim'            " Statusbar
-    Plug 'junegunn/vim-peekaboo'                " Displays a right buffer to view register content & select the desired register before pasting.
-    Plug 'windwp/nvim-autopairs'                " Automatically inserts matching brackets & quotes.
-    Plug 'kyazdani42/nvim-tree.lua'             " Sidebar which displays the current working-tree (files).
-    Plug 'kyazdani42/nvim-web-devicons'         " Icons for nvim-tree.
-    Plug 'hrsh7th/nvim-cmp'                     " Autocompletion plugin.
-    Plug 'hrsh7th/vim-vsnip'                    " Snipped engine used by nvim-cmp. Used to insert code snippets.
-    Plug 'hrsh7th/cmp-nvim-lsp'                 " LSP source for nvim-cmp. Is required to display lsp content in the autocomplete popover.
-    Plug 'hrsh7th/cmp-vsnip'                    " VSnip source for nvim-cmp.
-    Plug 'hrsh7th/cmp-buffer'                   " Buffer source for nvim-cmp.
-    Plug 'ray-x/lsp_signature.nvim'             " Shows function signature when you type.
-    Plug 'onsails/lspkind-nvim'                 " Adds pictograms to completion popups.
-    Plug 'lukas-reineke/indent-blankline.nvim'  " Display indentation lines.
-    Plug 'folke/trouble.nvim'                   " Display diagnostics in a pretty list.
-    Plug 'voldikss/vim-floaterm'                " Use the terminal in a floating/popup window.
-    Plug 'sindrets/diffview.nvim'               " Single tabpage interface for easily cycling through git diffs.
-    Plug 'rmagatti/auto-session'                " Automatically creates sessions on exit & restores them as soon as vim is started.
-    Plug 'numToStr/Comment.nvim'                " Smart and Powerful commenting plugin for neovim
-    Plug 'catppuccin/nvim'                      " Theme
+    Plug 'neovim/nvim-lspconfig' " Used to configure neovim lsp for different lsp servers.
+    Plug 'nvim-lualine/lualine.nvim' " Statusbar
+    Plug 'junegunn/vim-peekaboo' " Displays a right buffer to view register content & select the desired register before pasting.
+    Plug 'windwp/nvim-autopairs' " Automatically inserts matching brackets & quotes.
+    Plug 'kyazdani42/nvim-tree.lua' " Sidebar which displays the current working-tree (files).
+    Plug 'kyazdani42/nvim-web-devicons' " Icons for nvim-tree.
+    Plug 'hrsh7th/nvim-cmp' " Autocompletion plugin.
+    Plug 'hrsh7th/vim-vsnip' " Snipped engine used by nvim-cmp. Used to insert code snippets.
+    Plug 'hrsh7th/cmp-nvim-lsp' " LSP source for nvim-cmp. Is required to display lsp content in the autocomplete popover.
+    Plug 'hrsh7th/cmp-vsnip' " VSnip source for nvim-cmp.
+    Plug 'hrsh7th/cmp-buffer' " Buffer source for nvim-cmp.
+    Plug 'ray-x/lsp_signature.nvim' " Shows function signature when you type.
+    Plug 'onsails/lspkind-nvim' " Adds pictograms to completion popups.
+    Plug 'lukas-reineke/indent-blankline.nvim' " Display indentation lines.
+    Plug 'folke/trouble.nvim' " Display diagnostics in a pretty list.
+    Plug 'voldikss/vim-floaterm' " Use the terminal in a floating/popup window.
+    Plug 'sindrets/diffview.nvim' " Single tabpage interface for easily cycling through git diffs.
+    Plug 'rmagatti/auto-session' " Automatically creates sessions on exit & restores them as soon as vim is started.
+    Plug 'numToStr/Comment.nvim' " Smart and Powerful commenting plugin for neovim
+
+    " Themes
+    Plug 'catppuccin/nvim'
   endif
 call plug#end()
