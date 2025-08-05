@@ -28,8 +28,8 @@ nnoremap <leader>Q :qa<CR>
 
 " Navigate between windows
 nnoremap <silent> <C-h> :call WinMove('h')<cr>
-nnoremap <silent> <C-j> :call WinMove('j')<cr>
-nnoremap <silent> <C-k> :call WinMove('k')<cr>
+" nnoremap <silent> <C-j> :call WinMove('j')<cr>
+" nnoremap <silent> <C-k> :call WinMove('k')<cr>
 nnoremap <silent> <C-l> :call WinMove('l')<cr>
 
 " Line ending/start on home row
@@ -54,6 +54,10 @@ nnoremap <TAB> >>
 nnoremap <S-TAB> <<
 vnoremap <TAB> >
 vnoremap <S-TAB> <
+
+" Remap next/prev in popups
+inoremap <C-j> <C-n>
+inoremap <C-k> <C-p>
 
 " LSP keymaps (to be extended in env-specific configs)
 
@@ -146,6 +150,7 @@ call plug#begin(stdpath('data') . '/plugged')
   " Disable certain plugins IdeaVIM
   if !has('ide')
     Plug 'm4xshen/hardtime.nvim' "Break bad habits, master Vim motions.
+    Plug 'numToStr/Comment.nvim' " Smart and Powerful commenting plugin for neovim
   endif
 
   " Disable certain plugins for VSCode and IdeaVIM
@@ -172,9 +177,24 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'voldikss/vim-floaterm' " Use the terminal in a floating/popup window.
     Plug 'sindrets/diffview.nvim' " Single tabpage interface for easily cycling through git diffs.
     Plug 'rmagatti/auto-session' " Automatically creates sessions on exit & restores them as soon as vim is started.
-    Plug 'numToStr/Comment.nvim' " Smart and Powerful commenting plugin for neovim
 
     " Themes
     Plug 'catppuccin/nvim'
   endif
 call plug#end()
+
+" Plugin Configs
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+let g:sneak#label = 1
+
+if !has('ide')
+lua <<EOF
+    -- Hardtime
+  require('hardtime').setup {
+    disable_mouse = false
+  }
+
+  -- Comment
+  require('Comment').setup {}
+EOF
+endif

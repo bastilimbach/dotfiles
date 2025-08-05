@@ -43,19 +43,9 @@ augroup END
 " --------------
 " Plugin config
 " --------------
-let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-let g:sneak#label = 1
 let g:floaterm_title = '($1|$2)'
 
 lua <<EOF
-  -- Hardtime
-  require('hardtime').setup {
-    disable_mouse = false
-  }
-
-  -- Comment
-  require('Comment').setup {}
-
   -- Autopairs
   require('nvim-autopairs').setup {
     check_ts = true

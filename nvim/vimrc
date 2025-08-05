@@ -1,0 +1,9 @@
+" Source base config
+source $DOTFILES/nvim/configs/base.vim
+
+" Source environment-specific config
+if exists('g:vscode')
+  source $DOTFILES/nvim/configs/vscode.vim
+else
+  source $DOTFILES/nvim/configs/neovim.vim
+endif

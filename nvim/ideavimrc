@@ -1,1 +1,3 @@
-source ~/.dotfiles/nvim/init.vim
+source ~/.dotfiles/nvim/configs/base.vim
+source ~/.dotfiles/nvim/configs/idea.vim
+
