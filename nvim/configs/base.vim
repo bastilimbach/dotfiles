@@ -147,6 +147,11 @@ call plug#begin(stdpath('data') . '/plugged')
   Plug 'unblevable/quick-scope' " Highlight unique character in every word to help with f, F.
   Plug 'justinmk/vim-sneak' " Jump vertically using two characters.
 
+  " Enable certain plugins IdeaVIM
+  if has('ide')
+    Plug 'tpope/vim-commentary' " Same as Comment.nvim but written in vimscript and without treesitter
+  endif
+
   " Disable certain plugins IdeaVIM
   if !has('ide')
     Plug 'm4xshen/hardtime.nvim' "Break bad habits, master Vim motions.

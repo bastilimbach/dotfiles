@@ -10,8 +10,6 @@ nmap <leader>gt <Action>(GotoTest)
 nmap <leader>gf <Action>(Back)
 nmap <leader>gb <Action>(Forward)
 
-nmap gcc <Action>(CommentByLineComment)
-
 " File navigation
 nmap <leader>ff <action>(GotoFile)
 nmap <leader>fr <action>(RecentFiles)
