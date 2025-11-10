@@ -48,6 +48,7 @@
         autoCorrect = 1
 [push]
         default = current
+        autoSetupRemote = true
         followTags = true
 [pull]
         rebase = merges
