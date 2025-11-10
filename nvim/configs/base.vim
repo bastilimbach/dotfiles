@@ -26,12 +26,6 @@ nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>Q :qa<CR>
 
-" Navigate between windows
-nnoremap <silent> <C-h> :call WinMove('h')<cr>
-" nnoremap <silent> <C-j> :call WinMove('j')<cr>
-" nnoremap <silent> <C-k> :call WinMove('k')<cr>
-nnoremap <silent> <C-l> :call WinMove('l')<cr>
-
 " Line ending/start on home row
 nnoremap H ^
 nnoremap L $
@@ -108,19 +102,6 @@ function! Cond(cond, ...)
   let opts = get(a:000, 0, {})
   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
-
-func! WinMove(key)
-  let t:curwin = winnr()
-  exec 'wincmd '.a:key
-  if (t:curwin == winnr())
-    if (match(a:key,'[jk]'))
-      wincmd v
-    else
-      wincmd s
-    endif
-    exec 'wincmd '.a:key
-  endif
-endfu
 
 " --------------
 " Plugins (shared and environment-specific)

@@ -26,6 +26,25 @@ nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap gr <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap gi <cmd>lua vim.lsp.buf.implementation()<CR>
 
+" Navigate between windows
+nnoremap <silent> <C-h> :call WinMove('h')<cr>
+" nnoremap <silent> <C-j> :call WinMove('j')<cr>
+" nnoremap <silent> <C-k> :call WinMove('k')<cr>
+nnoremap <silent> <C-l> :call WinMove('l')<cr>
+
+func! WinMove(key)
+  let t:curwin = winnr()
+  exec 'wincmd '.a:key
+  if (t:curwin == winnr())
+    if (match(a:key,'[jk]'))
+      wincmd v
+    else
+      wincmd s
+    endif
+    exec 'wincmd '.a:key
+  endif
+endf
+
 " --------------
 " Autocommands
 " --------------
@@ -207,8 +226,6 @@ lua <<EOF
       { name = 'buffer' }
     },
     mapping = {
-      ['<Tab>'] = cmp.mapping.select_next_item(),
-      ['<S-Tab>'] = cmp.mapping.select_prev_item(),
       ['<C-d>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),

@@ -26,4 +26,8 @@ nmap <leader>rf <Action>(IntroduceField)
 nmap <leader>rs <Action>(ChangeSignature)
 nmap <leader>rr <Action>(Refactorings.QuickListPopupAction)
 
+" Window navigation
+nmap <C-j> <Action>(PrevSplitter)
+nmap <C-l> <Action>(NextSplitter)
+
 set highlightedyank
