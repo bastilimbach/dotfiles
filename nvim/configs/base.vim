@@ -49,10 +49,6 @@ nnoremap <S-TAB> <<
 vnoremap <TAB> >
 vnoremap <S-TAB> <
 
-" Remap next/prev in popups
-inoremap <C-j> <C-n>
-inoremap <C-k> <C-p>
-
 " LSP keymaps (to be extended in env-specific configs)
 
 " --------------
