@@ -17,9 +17,9 @@ export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30
 export CLICOLOR=true
 export PATH="/opt/homebrew/bin:./bin:/usr/local/bin:/usr/local/sbin:$DOTFILES/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/fre"
-export PLATIN_JAVA="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/fre"
-export PLUGIN_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_60.jdk/Contents/Home/fre"
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/sapmachine-17.jdk/Contents/Home"
+export PLATIN_JAVA=$JAVA_HOME
+export PLUGIN_HOME=$JAVA_HOME
 
 # Source ~/.profile if it exists
 if [ -f ~/.profile ]; then
@@ -35,6 +35,11 @@ source $DOTFILES/zsh/config.zsh
 
 # Source key-bindings & completions
 source $DOTFILES/zsh/completions.zsh
+
+# Source secrets if the file exists
+if [ -f "$DOTFILES/zsh/secrets.zsh" ]; then
+  source "$DOTFILES/zsh/secrets.zsh"
+fi
 
 # Source aliases
 for file in $DOTFILES/**/aliases.zsh; do

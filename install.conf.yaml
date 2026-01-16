@@ -12,7 +12,7 @@
 - link:
     ~/.zshrc: zsh/zshrc
     ~/.ideavimrc: nvim/ideavimrc
-    ~/.config/nvim/init.vim: nvim/init.vim
+    ~/.config/nvim/init.vim: nvim/vimrc
     ~/.gitignore: git/.gitignore
     ~/.gitconfig: git/.gitconfig
     ~/.gitconfig-sap: git/.gitconfig-sap

@@ -50,5 +50,6 @@ alias gcob='git checkout -b'
 alias gcp="git cherry-pick -x"
 alias gb='git branch'
 alias gbr='git branch -D'
+alias gbu='git branch -u origin/$(git rev-parse --abbrev-ref HEAD)'
 
 alias lg='lazygit'
