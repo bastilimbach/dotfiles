@@ -3,3 +3,5 @@
 *.swp
 .vscode
 .orig
+.claude/settings.local.json
+.claude/worktrees

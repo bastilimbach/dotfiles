@@ -49,6 +49,7 @@ alias gco='git checkout'
 alias gcob='git checkout -b'
 alias gcp="git cherry-pick -x"
 alias gb='git branch'
+alias gbl='git for-each-ref --sort=-committerdate --count=5 --format="%(committerdate:relative) | %(refname:short)" refs/heads/'
 alias gbr='git branch -D'
 alias gbu='git branch -u origin/$(git rev-parse --abbrev-ref HEAD)'
 
