@@ -1,4 +1,4 @@
-https://www.cyberwizard.io/posts/the-ultimate-ideavim-setup/
+" https://www.cyberwizard.io/posts/the-ultimate-ideavim-setup/
 
 " Go to code
 nmap gh <Action>(QuickJavaDoc)
