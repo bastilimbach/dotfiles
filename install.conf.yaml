@@ -22,9 +22,18 @@
 - shell:
   - command: git submodule update --init --recursive
     description: Installing submodules
-  - command: find . -name install.sh | while read installer ; do chmod u+x "${installer}" ; done
-    description: Make installers executable
-  - command: find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
-    description: Running installers
-  # - command: chsh -s $(which zsh)
-  #   description: Making zsh the default shell
+  - command: |
+      export PATH="/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin:$PATH"
+      if ! command -v brew >/dev/null 2>&1; then
+        echo "Homebrew not found, installing..."
+        NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
+          || { echo "ERROR: Homebrew installation failed" >&2; exit 1; }
+      fi
+      command -v brew >/dev/null 2>&1 || { echo "ERROR: Homebrew is required but is not available" >&2; exit 1; }
+      brew bundle --file="$PWD/homebrew/Brewfile"
+      echo ""
+      echo "To install optional desktop dependencies run:"
+      echo "  brew bundle --file=\"$PWD/homebrew/Brewfile.desktop\""
+    description: Installing Homebrew and dependencies
+  - command: if [ "$(uname -s)" = "Darwin" ]; then DOTFILES="$PWD" . "$PWD/macos/defaults.sh"; fi
+    description: Applying macOS preferences

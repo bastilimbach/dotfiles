@@ -1,0 +1,53 @@
+# Desktop extras — heavier tools and GUI apps for workstations (mac, WSL).
+# Installed on top of the essentials Brewfile. Not run automatically; apply with:
+#   brew bundle --file=homebrew/Brewfile.desktop
+
+# Taps
+tap "cloudfoundry/tap"
+tap "haiperspace/hai"
+tap "mvndaemon/mvnd"
+tap "powershell/tap"
+tap "satococoa/tap"
+
+# Formulae
+brew "ansible"
+brew "brainfuck"
+brew "cloc"
+brew "dasel"
+brew "efm-langserver"
+brew "grafana-agent"
+brew "haiperspace/hai/hai"
+brew "helix"
+brew "helm"
+brew "jsonnet"
+brew "k3d"
+brew "kubernetes-cli"
+brew "kyma-cli"
+brew "lazygit"
+brew "maven"
+brew "mingw-w64"
+brew "nmap"
+brew "ocrmypdf"
+brew "pandoc"
+brew "pipx"
+brew "postgresql@18"
+brew "python@3.10"
+brew "python@3.11"
+brew "qemu"
+brew "qrencode"
+brew "rust-analyzer"
+brew "sqlcipher"
+brew "tesseract-lang"
+brew "texlive"
+brew "watch"
+brew "wrk"
+
+# Casks (macOS only)
+if OS.mac?
+  cask "bruno"
+  cask "btp"
+  cask "claude-code"
+  cask "dbeaver-community"
+  cask "multipass"
+  cask "opensuperwhisper"
+end

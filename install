@@ -8,6 +8,20 @@ DOTBOT_DIR=".dotbot"
 DOTBOT_BIN="bin/dotbot"
 BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# zsh is required: it must be installed and the current default shell.
+# See the README for how to install zsh and make it the default.
+if ! command -v zsh >/dev/null 2>&1; then
+  echo "ERROR: zsh is not installed. Install it and set it as your default shell, then re-run ./install (see README)." >&2
+  exit 1
+fi
+case "${SHELL}" in
+  */zsh) ;;
+  *)
+    echo "ERROR: zsh is not your default shell (current: ${SHELL:-unknown}). Run 'chsh -s \$(command -v zsh)', then re-run ./install (see README)." >&2
+    exit 1
+    ;;
+esac
+
 cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"

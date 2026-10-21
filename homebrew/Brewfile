@@ -1,0 +1,9 @@
+# Essentials — installed on every machine (codespaces, raspberry pi, vps, desktops).
+# Applied by the dotfiles install flow via `brew bundle`.
+brew "cmake"
+brew "fzf"
+brew "git"
+brew "jq"
+brew "neovim"
+brew "ripgrep"
+brew "tmux"
