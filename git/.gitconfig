@@ -21,6 +21,7 @@
         editor = nvim
         pager = less -F -X
         compression = 0
+	autocrlf = input
 [apply]
         whitespace = nowarn
 [mergetool]
@@ -48,6 +49,7 @@
         autoCorrect = 1
 [push]
         default = current
+        autoSetupRemote = true
         followTags = true
 [pull]
         rebase = merges
@@ -63,6 +65,7 @@
         tool = Kaleidoscope
 [rebase]
         autoStash = true
+        updateRefs = true
 [status]
         submoduleSummary = true
         showUntrackedFiles = all
