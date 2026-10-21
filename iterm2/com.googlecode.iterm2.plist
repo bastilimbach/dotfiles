@@ -2,7 +2,31 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AIFeatureFunctionCalling</key>
+	<true/>
+	<key>AIFeatureHostedCodeInterpeter</key>
+	<true/>
+	<key>AIFeatureHostedFileSearch</key>
+	<true/>
+	<key>AIFeatureHostedWebSearch</key>
+	<true/>
+	<key>AIFeatureStreamingResponses</key>
+	<true/>
+	<key>AITermAPI</key>
+	<integer>2</integer>
+	<key>AIVectorStore</key>
+	<integer>0</integer>
 	<key>AdjustWindowForFontSizeChange</key>
+	<true/>
+	<key>AiMaxTokens</key>
+	<integer>400000</integer>
+	<key>AiModel</key>
+	<string>gpt-5.2</string>
+	<key>AiResponseMaxTokens</key>
+	<integer>128000</integer>
+	<key>AitermURL</key>
+	<string>https://api.openai.com/v1/responses</string>
+	<key>AllowClipboardAccess</key>
 	<true/>
 	<key>AlternateMouseScroll</key>
 	<true/>
@@ -14,6 +38,33 @@
 	<integer>10</integer>
 	<key>CloseBookmarksWindowAfterOpening</key>
 	<true/>
+	<key>CodeReviewSavedPrompts</key>
+	<data>
+	W3sidGV4dCI6IlJldmlldyB0aGUgcGVuZGluZyBjaGFuZ2VzIGluIHRoaXMgcmVwby4g
+	RmxhZyBpc3N1ZXMgYSBjYXJlZnVsIG1haW50YWluZXIgd291bGQgYmxvY2sgb24gYmVm
+	b3JlIG1lcmdlLCBpbiByb3VnaGx5IHRoaXMgb3JkZXI6XG4gIDEuIENvcnJlY3RuZXNz
+	IOKAlCBsb2dpYyBlcnJvcnMsIGJyb2tlbiBpbnZhcmlhbnRzLCBtaXNzZWQgZWRnZSBj
+	YXNlcywgb2ZmLWJ5LW9uZSwgcmFjZXMsIGxpZmV0aW1lXC9tZW1vcnkgYnVncywgZXJy
+	b3IgcGF0aHMgdGhhdCBzd2FsbG93IGZhaWx1cmVzLlxuICAyLiBTZWN1cml0eSDigJQg
+	aW5qZWN0aW9uLCBhdXRoblwvYXV0aHogbWlzdGFrZXMsIHNlY3JldCBoYW5kbGluZywg
+	dW5zYWZlIGRlc2VyaWFsaXphdGlvbiwgdW5zYWZlIGRlZmF1bHRzLCBUT0NUT1UuXG4g
+	IDMuIFJlbGlhYmlsaXR5ICYgcGVyZm9ybWFuY2Ug4oCUIGJsb2NraW5nIHRoZSB3cm9u
+	ZyB0aHJlYWQsIHVuYm91bmRlZCByZXNvdXJjZSB1c2UsIGFjY2lkZW50YWwgTyhOwrIp
+	LCByZXRyaWVzIHdpdGhvdXQgYmFja29mZiwgc2lsZW50IGZhaWx1cmUgcGF0aHMuXG4g
+	IDQuIENvbnRyYWN0IHJpc2sg4oCUIGJlaGF2aW9yIGNoYW5nZXMgY2FsbGVycyByZWx5
+	IG9uLCBzaWxlbnRseSBjaGFuZ2VkIGRlZmF1bHRzLCBicm9rZW4gYmFja3dhcmQgY29t
+	cGF0aWJpbGl0eSwgbWlzc2luZyBtaWdyYXRpb25zLlxuXG5Gb3IgZWFjaCBmaW5kaW5n
+	IGNpdGUgYGZpbGU6bGluZWAsIGV4cGxhaW4gKndoeSogaXQgaXMgd3JvbmcgKG5vdCB3
+	aGF0IHRoZSBjb2RlIGRvZXMpLCBhbmQgcHJvcG9zZSBhIGNvbmNyZXRlIGZpeCB3aGVu
+	IG9uZSBpcyBvYnZpb3VzLiBCZSBjYWxpYnJhdGVkOiBpZiBhIGZpbmRpbmcgaXMgbm90
+	IGhpZ2gtY29uZmlkZW5jZSwgc2F5IHNvIG9yIHNraXAgaXQuIFZlcmlmeSBjbGFpbXMg
+	YWdhaW5zdCB0aGUgYWN0dWFsIGNvZGUgcmF0aGVyIHRoYW4gaW5mZXJyaW5nIGZyb20g
+	bmFtZXMuXG5cblNraXAgcHVyZSBzdHlsZSwgZm9ybWF0dGluZywgbmFtaW5nLCBhbmQg
+	YW55dGhpbmcgYSBsaW50ZXIgb3IgQ0kgYWxyZWFkeSBlbmZvcmNlcy5cblxuSWYgeW91
+	IGZpbmQgbm90aGluZyB3b3J0aCBmaXhpbmcsIHNheSBzbyBwbGFpbmx5LiIsInV1aWQi
+	OiI0QzNGRjQ2Qi1BNTYwLTRBRTgtOUU3NS0yMURBNzZBRDFBNDMiLCJuYW1lIjoiRGVm
+	YXVsdCJ9XQ==
+	</data>
 	<key>CopySelection</key>
 	<false/>
 	<key>Default Bookmark Guid</key>
@@ -49,6 +100,19 @@
 			<integer>32</integer>
 			<key>Text</key>
 			<string></string>
+		</dict>
+		<key>0xd-0x20000-0x24</key>
+		<dict>
+			<key>Action</key>
+			<integer>12</integer>
+			<key>Keycode</key>
+			<integer>13</integer>
+			<key>Modifiers</key>
+			<integer>131072</integer>
+			<key>Text</key>
+			<string>\n</string>
+			<key>Version</key>
+			<integer>1</integer>
 		</dict>
 		<key>0xf700-0x300000</key>
 		<dict>
@@ -1388,7 +1452,7 @@
 	<key>PromptOnQuit</key>
 	<true/>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>ShowMetalFPSmeter</key>
 	<false/>
 	<key>SmartPlacement</key>
@@ -1431,6 +1495,37 @@
 	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
+	<key>Workgroups</key>
+	<data>
+	W3sidW5pcXVlSWRlbnRpZmllciI6ImJ1aWx0aW4uY2xhdWRlQ29kZSIsIm5hbWUiOiJD
+	bGF1ZGUgQ29kZSIsInNlc3Npb25zIjpbeyJ1bmlxdWVJZGVudGlmaWVyIjoiYnVpbHRp
+	bi5jbGF1ZGVDb2RlLm1haW4iLCJ0b29sYmFySXRlbXMiOlt7ImtpbmQiOiJtb2RlU3dp
+	dGNoZXIifSx7ImtpbmQiOiJnaXRTdGF0dXMifSx7ImtpbmQiOiJhdXRvUmVxdWVzdFJl
+	dmlld1doZW5JZGxlIn1dLCJtb2RlIjoicmVndWxhciIsInVybFN0cmluZyI6IiIsImtp
+	bmQiOnsia2luZCI6InJvb3QifSwicGVyRmlsZUNvbW1hbmQiOiIiLCJjb21tYW5kIjoi
+	IiwiZGlzcGxheU5hbWUiOiJDaGF0In0seyJkaXNwbGF5TmFtZSI6IkRpZmYiLCJ1bmlx
+	dWVJZGVudGlmaWVyIjoiYnVpbHRpbi5jbGF1ZGVDb2RlLmRpZmYiLCJ0b29sYmFySXRl
+	bXMiOlt7ImtpbmQiOiJtb2RlU3dpdGNoZXIifSx7ImtpbmQiOiJjaGFuZ2VkRmlsZVNl
+	bGVjdG9yIn0seyJraW5kIjoiZ2l0QmFzZVNlbGVjdG9yIn0seyJmb3J3YXJkU2hvcnRj
+	dXQiOnsic2VyaWFsaXplZCI6IjB4ZjcwMy0weDM0MDAwMC0weDdjIn0sImtpbmQiOiJu
+	YXZpZ2F0aW9uIiwiYmFja1Nob3J0Y3V0Ijp7InNlcmlhbGl6ZWQiOiIweGY3MDItMHgz
+	NDAwMDAtMHg3YiJ9LCJyZWxvYWRTaG9ydGN1dCI6eyJzZXJpYWxpemVkIjoiMHg3Mi0w
+	eDEwMDAwMC0weGYifX1dLCJtb2RlIjoiZGlmZiIsInVybFN0cmluZyI6IiIsImtpbmQi
+	Onsia2luZCI6InBlZXIifSwicGVyRmlsZUNvbW1hbmQiOiJnaXQgZGlmZnRvb2wgLXkg
+	LXggdmltZGlmZiBcXChnaXRCYXNlKSAtLSBcXChmaWxlKSIsInBhcmVudElEIjoiYnVp
+	bHRpbi5jbGF1ZGVDb2RlLm1haW4iLCJjb21tYW5kIjoiZ2l0IGRpZmZ0b29sIC15IC14
+	IHZpbWRpZmYgXFwoZ2l0QmFzZSkifSx7ImRpc3BsYXlOYW1lIjoiQ29kZSBSZXZpZXci
+	LCJ1bmlxdWVJZGVudGlmaWVyIjoiYnVpbHRpbi5jbGF1ZGVDb2RlLnJldmlldyIsInRv
+	b2xiYXJJdGVtcyI6W3sia2luZCI6Im1vZGVTd2l0Y2hlciJ9LHsia2luZCI6InJlbG9h
+	ZCIsInNob3J0Y3V0Ijp7InNlcmlhbGl6ZWQiOiIweDcyLTB4MTAwMDAwLTB4ZiJ9fSx7
+	ImtpbmQiOiJhdXRvU2VuZENsaXBwaW5nc1doZW5JZGxlIn1dLCJtb2RlIjoiY29kZVJl
+	dmlldyIsInVybFN0cmluZyI6IiIsImtpbmQiOnsia2luZCI6InBlZXIifSwicGVyRmls
+	ZUNvbW1hbmQiOiIiLCJwYXJlbnRJRCI6ImJ1aWx0aW4uY2xhdWRlQ29kZS5tYWluIiwi
+	Y29tbWFuZCI6ImNsYXVkZSBcXChjb2RlUmV2aWV3UHJvbXB0KSAtLWFwcGVuZC1zeXN0
+	ZW0tcHJvbXB0LWZpbGUgJ1xcKGNvZGVSZXZpZXdTeXN0ZW1Qcm9tcHRGaWxlKScgLS1z
+	ZXR0aW5ncyAnXFwoaXRlcm0yLmFwcEJ1bmRsZVBhdGgpXC9Db250ZW50c1wvUmVzb3Vy
+	Y2VzXC9jb2RlLXJldmlldy1zZXR0aW5ncy50eHQnIn1dfV0=
+	</data>
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewPreferredModeKey</key>
