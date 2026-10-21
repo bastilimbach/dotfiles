@@ -1,4 +1,6 @@
-# Environment variables
+# zmodload zsh/zprof
+
+# Bootstrap: locate the dotfiles before sourcing anything.
 if [ ! -d "$HOME/.dotfiles" ] && [ ! -d "/workspaces/.codespaces" ]; then
   echo "ERROR: The dotfiles need to be cloned to ${HOME}/.dotfiles."
   echo "ERROR: If the dotfiles where cloned to a different place, multiple things will break!"
@@ -10,16 +12,8 @@ if [ -d "/workspaces/.codespaces" ]; then
   export DOTFILES=/workspaces/.codespaces/.persistedshare/dotfiles
 fi
 
-export BROWSER=firefox
-export EDITOR=code
-export LSCOLORS="exfxcxdxbxegedabagacad"
-export LS_COLORS="di=34:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
-export CLICOLOR=true
-export PATH="/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin:./bin:/usr/local/bin:/usr/local/sbin:$DOTFILES/bin:$PATH"
-export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/sapmachine-17.jdk/Contents/Home"
-export PLATIN_JAVA=$JAVA_HOME
-export PLUGIN_HOME=$JAVA_HOME
+# Source environment variables
+source $DOTFILES/zsh/env.zsh
 
 # Source ~/.profile if it exists
 if [ -f ~/.profile ]; then
@@ -28,10 +22,18 @@ fi
 
 # Source zinit zsh plugin manager
 source $DOTFILES/.zinit/zinit.zsh
-autoload -Uz compinit && compinit
 
 # Source config
 source $DOTFILES/zsh/config.zsh
+
+# Completions
+fpath=(/opt/homebrew/share/zsh/site-functions /home/linuxbrew/.linuxbrew/share/zsh/site-functions $fpath)
+autoload -Uz compinit
+# Rebuild the completion dump at most once a day; load the cache (-C) otherwise.
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then compinit; else compinit -C; fi
+if [[ ! ~/.zcompdump.zwc -nt ~/.zcompdump ]]; then
+  zcompile ~/.zcompdump &!
+fi
 
 # Source key-bindings & completions
 source $DOTFILES/zsh/completions.zsh
@@ -53,10 +55,10 @@ zinit for \
   fribmendes/geometry \
   chrissicool/zsh-256color \
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# fnm — fast node version manager; --use-on-cd honors .nvmrc/.node-version on cd
+command -v fnm >/dev/null && eval "$(fnm env --use-on-cd)"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# zprof
