@@ -1,9 +1,9 @@
 " Source base config
-source $DOTFILES/nvim/configs/base.vim
+source $DOTFILES/nvim/configs/base-config.vim
 
 " Source environment-specific config
 if exists('g:vscode')
-  source $DOTFILES/nvim/configs/vscode.vim
+  luafile $DOTFILES/nvim/configs/vscode.lua
 else
-  source $DOTFILES/nvim/configs/neovim.vim
+  luafile $DOTFILES/nvim/configs/neovim.lua
 endif
